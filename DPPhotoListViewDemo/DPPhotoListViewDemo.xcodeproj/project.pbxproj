@@ -1,0 +1,496 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		13F0602E2C9E94E851311BAD /* libPods-DPPhotoListViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */; };
+		49F2DDAE1F4D28CA007B0CB7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDAD1F4D28CA007B0CB7 /* main.m */; };
+		49F2DDB11F4D28CA007B0CB7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDB01F4D28CA007B0CB7 /* AppDelegate.m */; };
+		49F2DDB41F4D28CA007B0CB7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDB31F4D28CA007B0CB7 /* ViewController.m */; };
+		49F2DDB71F4D28CA007B0CB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F2DDB51F4D28CA007B0CB7 /* Main.storyboard */; };
+		49F2DDB91F4D28CA007B0CB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F2DDB81F4D28CA007B0CB7 /* Assets.xcassets */; };
+		49F2DDBC1F4D28CA007B0CB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F2DDBA1F4D28CA007B0CB7 /* LaunchScreen.storyboard */; };
+		49F2DDC81F4D2A0E007B0CB7 /* DPPhoto_library_holdImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F2DDC51F4D2A0E007B0CB7 /* DPPhoto_library_holdImage.png */; };
+		49F2DDC91F4D2A0E007B0CB7 /* DPPhoto_library_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F2DDC61F4D2A0E007B0CB7 /* DPPhoto_library_delete.png */; };
+		49F2DDCA1F4D2A0E007B0CB7 /* DPPhoto_library_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F2DDC71F4D2A0E007B0CB7 /* DPPhoto_library_more.png */; };
+		49F2DDF41F4D2D7B007B0CB7 /* DPPhotoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDEF1F4D2D7B007B0CB7 /* DPPhotoUtils.m */; };
+		49F2DDF51F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDF11F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.m */; };
+		49F2DDF61F4D2D7B007B0CB7 /* UIView+DPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDF31F4D2D7B007B0CB7 /* UIView+DPCategory.m */; };
+		49F2DDFC1F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDF91F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m */; };
+		49F2DDFD1F4D2DD6007B0CB7 /* DPPhotoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDFB1F4D2DD6007B0CB7 /* DPPhotoListView.m */; };
+		49F2DE1B1F4D8B14007B0CB7 /* DPPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DE181F4D8B14007B0CB7 /* DPPhotoBrowser.m */; };
+		49F2DE1C1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DE1A1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2CD9E3E04A95DDEB12E3BC06 /* Pods-DPPhotoListViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DPPhotoListViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DPPhotoListViewDemo/Pods-DPPhotoListViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DPPhotoListViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49F2DDA91F4D28CA007B0CB7 /* DPPhotoListViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DPPhotoListViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49F2DDAD1F4D28CA007B0CB7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49F2DDAF1F4D28CA007B0CB7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		49F2DDB01F4D28CA007B0CB7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		49F2DDB21F4D28CA007B0CB7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		49F2DDB31F4D28CA007B0CB7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		49F2DDB61F4D28CA007B0CB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49F2DDB81F4D28CA007B0CB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49F2DDBB1F4D28CA007B0CB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		49F2DDBD1F4D28CA007B0CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49F2DDC51F4D2A0E007B0CB7 /* DPPhoto_library_holdImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPPhoto_library_holdImage.png; sourceTree = "<group>"; };
+		49F2DDC61F4D2A0E007B0CB7 /* DPPhoto_library_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPPhoto_library_delete.png; sourceTree = "<group>"; };
+		49F2DDC71F4D2A0E007B0CB7 /* DPPhoto_library_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPPhoto_library_more.png; sourceTree = "<group>"; };
+		49F2DDCB1F4D2A54007B0CB7 /* DPPhotoLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPPhotoLibrary.h; path = ../DPPhotoLibrary.h; sourceTree = "<group>"; };
+		49F2DDEC1F4D2B55007B0CB7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		49F2DDEE1F4D2D7B007B0CB7 /* DPPhotoUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoUtils.h; sourceTree = "<group>"; };
+		49F2DDEF1F4D2D7B007B0CB7 /* DPPhotoUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoUtils.m; sourceTree = "<group>"; };
+		49F2DDF01F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DPPerformSEL.h"; sourceTree = "<group>"; };
+		49F2DDF11F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DPPerformSEL.m"; sourceTree = "<group>"; };
+		49F2DDF21F4D2D7B007B0CB7 /* UIView+DPCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DPCategory.h"; sourceTree = "<group>"; };
+		49F2DDF31F4D2D7B007B0CB7 /* UIView+DPCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DPCategory.m"; sourceTree = "<group>"; };
+		49F2DDF81F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoListCollectionViewCell.h; sourceTree = "<group>"; };
+		49F2DDF91F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoListCollectionViewCell.m; sourceTree = "<group>"; };
+		49F2DDFA1F4D2DD6007B0CB7 /* DPPhotoListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoListView.h; sourceTree = "<group>"; };
+		49F2DDFB1F4D2DD6007B0CB7 /* DPPhotoListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoListView.m; sourceTree = "<group>"; };
+		49F2DE171F4D8B14007B0CB7 /* DPPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoBrowser.h; sourceTree = "<group>"; };
+		49F2DE181F4D8B14007B0CB7 /* DPPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoBrowser.m; sourceTree = "<group>"; };
+		49F2DE191F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoBrowserCollectionViewCell.h; sourceTree = "<group>"; };
+		49F2DE1A1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoBrowserCollectionViewCell.m; sourceTree = "<group>"; };
+		E8BB476FED3C473B434963C3 /* Pods-DPPhotoListViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DPPhotoListViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DPPhotoListViewDemo/Pods-DPPhotoListViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49F2DDA61F4D28CA007B0CB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13F0602E2C9E94E851311BAD /* libPods-DPPhotoListViewDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		46059490DC73F099F826C9AD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9E3E04A95DDEB12E3BC06 /* Pods-DPPhotoListViewDemo.debug.xcconfig */,
+				E8BB476FED3C473B434963C3 /* Pods-DPPhotoListViewDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		49F2DDA01F4D28CA007B0CB7 = {
+			isa = PBXGroup;
+			children = (
+				49F2DDAB1F4D28CA007B0CB7 /* DPPhotoListViewDemo */,
+				49F2DDAA1F4D28CA007B0CB7 /* Products */,
+				46059490DC73F099F826C9AD /* Pods */,
+				DB401EB1682E6AA2BEF83D38 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		49F2DDAA1F4D28CA007B0CB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DDA91F4D28CA007B0CB7 /* DPPhotoListViewDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49F2DDAB1F4D28CA007B0CB7 /* DPPhotoListViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DDC31F4D296B007B0CB7 /* DPPhotoListView */,
+				49F2DDAF1F4D28CA007B0CB7 /* AppDelegate.h */,
+				49F2DDB01F4D28CA007B0CB7 /* AppDelegate.m */,
+				49F2DDB21F4D28CA007B0CB7 /* ViewController.h */,
+				49F2DDB31F4D28CA007B0CB7 /* ViewController.m */,
+				49F2DDEC1F4D2B55007B0CB7 /* PrefixHeader.pch */,
+				49F2DDB51F4D28CA007B0CB7 /* Main.storyboard */,
+				49F2DDB81F4D28CA007B0CB7 /* Assets.xcassets */,
+				49F2DDBA1F4D28CA007B0CB7 /* LaunchScreen.storyboard */,
+				49F2DDBD1F4D28CA007B0CB7 /* Info.plist */,
+				49F2DDAC1F4D28CA007B0CB7 /* Supporting Files */,
+			);
+			path = DPPhotoListViewDemo;
+			sourceTree = "<group>";
+		};
+		49F2DDAC1F4D28CA007B0CB7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DDAD1F4D28CA007B0CB7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49F2DDC31F4D296B007B0CB7 /* DPPhotoListView */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DDF71F4D2DB6007B0CB7 /* PhotoLibrary */,
+				49F2DE011F4D6EA7007B0CB7 /* PhotoBrowser */,
+				49F2DDED1F4D2D5E007B0CB7 /* Utils */,
+				49F2DDC41F4D2A07007B0CB7 /* Resource */,
+			);
+			path = DPPhotoListView;
+			sourceTree = "<group>";
+		};
+		49F2DDC41F4D2A07007B0CB7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DDC51F4D2A0E007B0CB7 /* DPPhoto_library_holdImage.png */,
+				49F2DDC61F4D2A0E007B0CB7 /* DPPhoto_library_delete.png */,
+				49F2DDC71F4D2A0E007B0CB7 /* DPPhoto_library_more.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		49F2DDED1F4D2D5E007B0CB7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DDCB1F4D2A54007B0CB7 /* DPPhotoLibrary.h */,
+				49F2DDEE1F4D2D7B007B0CB7 /* DPPhotoUtils.h */,
+				49F2DDEF1F4D2D7B007B0CB7 /* DPPhotoUtils.m */,
+				49F2DDF01F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.h */,
+				49F2DDF11F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.m */,
+				49F2DDF21F4D2D7B007B0CB7 /* UIView+DPCategory.h */,
+				49F2DDF31F4D2D7B007B0CB7 /* UIView+DPCategory.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		49F2DDF71F4D2DB6007B0CB7 /* PhotoLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DDFA1F4D2DD6007B0CB7 /* DPPhotoListView.h */,
+				49F2DDFB1F4D2DD6007B0CB7 /* DPPhotoListView.m */,
+				49F2DDF81F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.h */,
+				49F2DDF91F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m */,
+			);
+			path = PhotoLibrary;
+			sourceTree = "<group>";
+		};
+		49F2DE011F4D6EA7007B0CB7 /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				49F2DE171F4D8B14007B0CB7 /* DPPhotoBrowser.h */,
+				49F2DE181F4D8B14007B0CB7 /* DPPhotoBrowser.m */,
+				49F2DE191F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.h */,
+				49F2DE1A1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m */,
+			);
+			path = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		DB401EB1682E6AA2BEF83D38 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49F2DDA81F4D28CA007B0CB7 /* DPPhotoListViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49F2DDC01F4D28CA007B0CB7 /* Build configuration list for PBXNativeTarget "DPPhotoListViewDemo" */;
+			buildPhases = (
+				6927475533E3159B822079CB /* [CP] Check Pods Manifest.lock */,
+				49F2DDA51F4D28CA007B0CB7 /* Sources */,
+				49F2DDA61F4D28CA007B0CB7 /* Frameworks */,
+				49F2DDA71F4D28CA007B0CB7 /* Resources */,
+				07A41F15B175AC0BA48B07F5 /* [CP] Embed Pods Frameworks */,
+				07C43E0A9055602EE2FACBDC /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DPPhotoListViewDemo;
+			productName = DPPhotoListViewDemo;
+			productReference = 49F2DDA91F4D28CA007B0CB7 /* DPPhotoListViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49F2DDA11F4D28CA007B0CB7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Andrew;
+				TargetAttributes = {
+					49F2DDA81F4D28CA007B0CB7 = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 49F2DDA41F4D28CA007B0CB7 /* Build configuration list for PBXProject "DPPhotoListViewDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49F2DDA01F4D28CA007B0CB7;
+			productRefGroup = 49F2DDAA1F4D28CA007B0CB7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49F2DDA81F4D28CA007B0CB7 /* DPPhotoListViewDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49F2DDA71F4D28CA007B0CB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49F2DDBC1F4D28CA007B0CB7 /* LaunchScreen.storyboard in Resources */,
+				49F2DDC91F4D2A0E007B0CB7 /* DPPhoto_library_delete.png in Resources */,
+				49F2DDB91F4D28CA007B0CB7 /* Assets.xcassets in Resources */,
+				49F2DDCA1F4D2A0E007B0CB7 /* DPPhoto_library_more.png in Resources */,
+				49F2DDB71F4D28CA007B0CB7 /* Main.storyboard in Resources */,
+				49F2DDC81F4D2A0E007B0CB7 /* DPPhoto_library_holdImage.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07A41F15B175AC0BA48B07F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DPPhotoListViewDemo/Pods-DPPhotoListViewDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		07C43E0A9055602EE2FACBDC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DPPhotoListViewDemo/Pods-DPPhotoListViewDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6927475533E3159B822079CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49F2DDA51F4D28CA007B0CB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49F2DDF51F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.m in Sources */,
+				49F2DE1B1F4D8B14007B0CB7 /* DPPhotoBrowser.m in Sources */,
+				49F2DDB41F4D28CA007B0CB7 /* ViewController.m in Sources */,
+				49F2DDF61F4D2D7B007B0CB7 /* UIView+DPCategory.m in Sources */,
+				49F2DDB11F4D28CA007B0CB7 /* AppDelegate.m in Sources */,
+				49F2DE1C1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m in Sources */,
+				49F2DDFD1F4D2DD6007B0CB7 /* DPPhotoListView.m in Sources */,
+				49F2DDF41F4D2D7B007B0CB7 /* DPPhotoUtils.m in Sources */,
+				49F2DDAE1F4D28CA007B0CB7 /* main.m in Sources */,
+				49F2DDFC1F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		49F2DDB51F4D28CA007B0CB7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49F2DDB61F4D28CA007B0CB7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		49F2DDBA1F4D28CA007B0CB7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49F2DDBB1F4D28CA007B0CB7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49F2DDBE1F4D28CA007B0CB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		49F2DDBF1F4D28CA007B0CB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		49F2DDC11F4D28CA007B0CB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CD9E3E04A95DDEB12E3BC06 /* Pods-DPPhotoListViewDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DPPhotoListViewDemo/PrefixHeader.pch";
+				INFOPLIST_FILE = DPPhotoListViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrew.DPPhotoListViewDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		49F2DDC21F4D28CA007B0CB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8BB476FED3C473B434963C3 /* Pods-DPPhotoListViewDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DPPhotoListViewDemo/PrefixHeader.pch";
+				INFOPLIST_FILE = DPPhotoListViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrew.DPPhotoListViewDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49F2DDA41F4D28CA007B0CB7 /* Build configuration list for PBXProject "DPPhotoListViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49F2DDBE1F4D28CA007B0CB7 /* Debug */,
+				49F2DDBF1F4D28CA007B0CB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49F2DDC01F4D28CA007B0CB7 /* Build configuration list for PBXNativeTarget "DPPhotoListViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49F2DDC11F4D28CA007B0CB7 /* Debug */,
+				49F2DDC21F4D28CA007B0CB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49F2DDA11F4D28CA007B0CB7 /* Project object */;
+}
