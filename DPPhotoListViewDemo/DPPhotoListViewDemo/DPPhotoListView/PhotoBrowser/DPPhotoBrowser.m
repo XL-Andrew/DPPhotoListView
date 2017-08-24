@@ -147,16 +147,16 @@
     UILabel *label = [[UILabel alloc] init];
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.50f];
-    label.layer.cornerRadius = 5;
+    label.layer.cornerRadius = 4;
     label.clipsToBounds = YES;
-    label.frame = CGRectMake((SCREEN_WIDTH - 100) / 2, (SCREEN_HEIGHT - 40) / 2, 100, 40);
+    label.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, (SCREEN_HEIGHT - 40) / 2, 150, 40);
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont boldSystemFontOfSize:14];
     [self.view addSubview:label];
     if (error) {
         label.text = @"保存失败";
     }   else {
-        label.text = @"保存成功";
+        label.text = @"已保存到系统相册";
     }
     [label performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:1.5];
 }
@@ -169,7 +169,7 @@
         
         NSString *version = [UIDevice currentDevice].systemVersion;
         if (version.doubleValue >= 8.0) {
-            // iOS系统版本 >= 8.0 跳入当前App设置界面,
+            // iOS系统版本 >= 8.0 跳入当前App设置界面
             [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
             
         } else {

@@ -131,7 +131,7 @@
         cell.showDeleteButton = NO;
     }
 
-    //点击删除
+    //点击删除回调
     cell.deleteButtonClickBlock = ^{
         NSIndexPath *indexPath = [_mainCollectionView indexPathForCell:cell];
         [_dataSource removeObjectAtIndex:indexPath.row];
@@ -263,27 +263,5 @@
 {
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-#pragma mark - DPPhotoBrowserDelegate
-////需要显示的图片个数
-//- (NSUInteger)numberOfPhotosInPhotoBrowser:(DPPhotoBrowser *)photoBrowser{
-//    
-//    if (_showAddImagesButton) {
-//        return _dataSource.count - 1;
-//    }
-//    return _dataSource.count;
-//}
-//
-////返回需要显示的图片对应的Photo实例,通过Photo类指定大图的URL,以及原始的图片视图
-//- (DPPhoto *)photoBrowser:(DPPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index
-//{
-//    DPPhotoListCollectionViewCell *cell = (DPPhotoListCollectionViewCell *)[_mainCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-//    
-//    DPPhoto *photo = [[DPPhoto alloc] init];
-//    photo.browseImageView = cell.photoImageView;
-//    return photo;
-//}
-
 
 @end

@@ -63,7 +63,7 @@ typedef enum : NSUInteger {
  @param frame frame
  @param lineNumber 一行展示几个cell
  @param lineSpacing cell上下左右间距
- @param dataSource 图片数据源
+ @param dataSource 图片数据源（可以是本地图片，可以是网络图片，也可是图片data）
  @return self
  */
 - (instancetype)initWithFrame:(CGRect)frame numberOfCellInRow:(NSUInteger)lineNumber lineSpacing:(CGFloat)lineSpacing dataSource:(NSMutableArray *)dataSource;

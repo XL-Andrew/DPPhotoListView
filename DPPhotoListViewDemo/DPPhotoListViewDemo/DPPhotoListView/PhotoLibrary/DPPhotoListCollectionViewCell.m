@@ -89,13 +89,13 @@
             [self.photoImageView performSelector:@selector(sd_setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:photoURL] withObject:Placeholder_Image];
         }
         
-        //当不存在YYWebImageView && SDWebImageView 系统默认加载方法
+        //当不存在YYWebImageView && SDWebImageView 系统默认加载方法，无缓存方案
         
         else {
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]];
                 //通知主线程刷新
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]];
                     self.photoImageView.image = [UIImage imageWithData:data];
                 });
                 
@@ -103,14 +103,15 @@
         }
     }
     
-    //更多按钮背景图
-    
-    else if ([photoURL isEqualToString:@"DPPhoto_library_more"]) {
+    //本地图片展示
+        
+    else if ([UIImage imageNamed:photoURL]) {
         self.photoImageView.image = [UIImage imageNamed:photoURL];
-        
-        //base64编码格式图片
-        
-    } else {
+    }
+    
+    //base64编码格式图片
+    
+    else {
         NSData *data = [[NSData alloc]initWithBase64EncodedString:photoURL options:0];
         self.photoImageView.image = [UIImage imageWithData:data];
     }

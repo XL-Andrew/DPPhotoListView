@@ -64,40 +64,41 @@
         
         //识别YYWebImageView
         
-        if ([_photoImageView respondsToSelector:@selector(setImageWithURL:placeholder:options:completion:)]) {
-            [_photoImageView performSelector:@selector(setImageWithURL:placeholder:options:completion:) withObjects:@[[NSURL URLWithString:browserPhotoURL], Placeholder_Image, @4096]];
+        if ([self.photoImageView respondsToSelector:@selector(setImageWithURL:placeholder:options:completion:)]) {
+            [self.photoImageView performSelector:@selector(setImageWithURL:placeholder:options:completion:) withObjects:@[[NSURL URLWithString:browserPhotoURL], Placeholder_Image, @4096]];
         }
         
         //识别SDWebImageView
         
-        else if ([_photoImageView respondsToSelector:@selector(sd_setImageWithURL:placeholderImage:)]) {
-            [_photoImageView performSelector:@selector(sd_setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:browserPhotoURL] withObject:Placeholder_Image];
+        else if ([self.photoImageView respondsToSelector:@selector(sd_setImageWithURL:placeholderImage:)]) {
+            [self.photoImageView performSelector:@selector(sd_setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:browserPhotoURL] withObject:Placeholder_Image];
         }
         
-        //当不存在YYWebImageView && SDWebImageView 系统默认加载方法
+        //当不存在YYWebImageView && SDWebImageView 系统默认加载方法，无缓存方案
         
         else {
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:browserPhotoURL]];
                 //通知主线程刷新
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _photoImageView.image = [UIImage imageWithData:data];
+                    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:browserPhotoURL]];
+                    self.photoImageView.image = [UIImage imageWithData:data];
                 });
                 
             });
         }
     }
     
-    //更多按钮背景图
+    //本地图片展示
     
-    else if ([browserPhotoURL isEqualToString:@"DPPhoto_library_more"]) {
-        _photoImageView.image = [UIImage imageNamed:browserPhotoURL];
-        
-        //base64编码格式图片
-        
-    } else {
+    else if ([UIImage imageNamed:browserPhotoURL]) {
+        self.photoImageView.image = [UIImage imageNamed:browserPhotoURL];
+    }
+    
+    //base64编码格式图片
+    
+    else {
         NSData *data = [[NSData alloc]initWithBase64EncodedString:browserPhotoURL options:0];
-        _photoImageView.image = [UIImage imageWithData:data];
+        self.photoImageView.image = [UIImage imageWithData:data];
     }
     
     _photoImageView.frame = [self setImageViewFrameWithImage:_photoImageView.image];
@@ -143,20 +144,20 @@
 }
 
 #pragma mark -  UIScrollViewDelegate
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
     return _photoImageView;
 }
 //以中心点缩放
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
     CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?
     (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
     
     CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?
     (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
     
-    _photoImageView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX,
-                                    scrollView.contentSize.height * 0.5 + offsetY);
+    _photoImageView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
 }
 
 #pragma mark -  工具方法
@@ -164,7 +165,7 @@
 {
     if (kimage == nil) return CGRectZero;
     
-    CGFloat image_H = SCREEN_WIDTH / kimage.size.width * kimage.size.height;
+    CGFloat image_H =   SCREEN_WIDTH / kimage.size.width * kimage.size.height;
     CGFloat image_Y = (SCREEN_HEIGHT - image_H) / 2;
     
     if (image_H >= SCREEN_HEIGHT) {
