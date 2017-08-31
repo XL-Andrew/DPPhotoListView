@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    DPPhotoShadowDirectionVertical,
+    DPPhotoShadowDirectionHorizontal
+} DPPhotoShadowDirection;
+
 @interface DPPhotoBrowser : UIViewController
 
 /**
@@ -20,12 +25,17 @@
  */
 @property (nonatomic, assign) CGRect zoomViewRect;
 
+/**
+ 缩放动画(用于处理横屏滚动时,回缩动画错位)
+ */
+@property (nonatomic, assign) BOOL showZoomAnimation;
 
 /**
  显示图片浏览器
 
  @param index 显示位置
+ @param shadowDirection 回缩影子展示方向
  */
-- (void)shwoPhotoBrowserAtIndex:(NSUInteger)index;
+- (void)shwoPhotoBrowserAtIndex:(NSUInteger)index shadowDirection:(DPPhotoShadowDirection)shadowDirection;
 
 @end

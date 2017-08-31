@@ -54,7 +54,6 @@
     
     //stpe 4 (竖列表展示方式)
     photoListView = [[DPPhotoListView alloc]initWithFrame:CGRectMake(0, 64 + 20, self.view.bounds.size.width, SCREEN_HEIGHT - 64 - 20) numberOfCellInRow:3 lineSpacing:15 dataSource:[urlArray mutableCopy]];
-    photoListView.photoScrollDirection = DPPhotoScrollDirectionHorizontal;
     photoListView.showAddImagesButton = YES;
     photoListView.allowLongPressEditPhoto = YES;
     photoListView.delegate = self;

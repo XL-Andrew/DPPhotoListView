@@ -59,23 +59,42 @@
 
 #pragma mark -  public
 //显示图片浏览器
-- (void)shwoPhotoBrowserAtIndex:(NSUInteger)index
+- (void)shwoPhotoBrowserAtIndex:(NSUInteger)index shadowDirection:(DPPhotoShadowDirection)shadowDirection
 {
-    //模拟设置回缩影像位置
     _zoomRectArray = [NSMutableArray array];
-    int lineNumber = SCREEN_WIDTH / (_tempImageZoomRect.size.width + 1) > 0?:1;//每行多少view
-    int lineSpacing = ((int)SCREEN_WIDTH % (int)_tempImageZoomRect.size.width) / (lineNumber + 1);
-    CGFloat zoomView_W = _tempImageZoomRect.size.width;//宽
-    CGFloat zoomView_H = _tempImageZoomRect.size.width;//高
-    CGFloat margin_X = _tempImageZoomRect.origin.x - (index % lineNumber) * (zoomView_W + lineSpacing);//X坐标
-    CGFloat margin_Y = _tempImageZoomRect.origin.y - (index / lineNumber) * (zoomView_W + lineSpacing);//Y坐标
-    for (int i = 0; i < _dataSource.count; i ++) {
-        int row = i / lineNumber;//行号
-        int loc = i % lineNumber;//列号
-        CGFloat zoomView_X = margin_X + (lineSpacing + zoomView_W) * loc;
-        CGFloat zoomView_Y = margin_Y + (lineSpacing + zoomView_H) * row;
+    if (shadowDirection == DPPhotoShadowDirectionVertical) {
         
-        [_zoomRectArray addObject:[NSValue valueWithCGRect:CGRectMake(zoomView_X, zoomView_Y, zoomView_W, zoomView_H)]];
+        //模拟设置回缩影像位置
+        int lineNumber = SCREEN_WIDTH / (_tempImageZoomRect.size.width + 1);//每行多少view
+        int lineSpacing = ((int)SCREEN_WIDTH % (int)_tempImageZoomRect.size.width) / (lineNumber + 1);
+        CGFloat zoomView_W = _tempImageZoomRect.size.width;//宽
+        CGFloat zoomView_H = _tempImageZoomRect.size.width;//高
+        CGFloat margin_X = _tempImageZoomRect.origin.x - (index % lineNumber) * (zoomView_W + lineSpacing);//X坐标
+        CGFloat margin_Y = _tempImageZoomRect.origin.y - (index / lineNumber) * (zoomView_W + lineSpacing);//Y坐标
+        for (int i = 0; i < _dataSource.count; i ++) {
+            int row = i / lineNumber;//行号
+            int loc = i % lineNumber;//列号
+            CGFloat zoomView_X = margin_X + (lineSpacing + zoomView_W) * loc;
+            CGFloat zoomView_Y = margin_Y + (lineSpacing + zoomView_H) * row;
+            
+            [_zoomRectArray addObject:[NSValue valueWithCGRect:CGRectMake(zoomView_X, zoomView_Y, zoomView_W, zoomView_H)]];
+        }
+    } else {
+        //模拟设置回缩影像位置
+        int lineNumber = (int)_dataSource.count;//每行多少view
+        int lineSpacing = 15;
+        CGFloat zoomView_W = _tempImageZoomRect.size.width;//宽
+        CGFloat zoomView_H = _tempImageZoomRect.size.width;//高
+        CGFloat margin_X = _tempImageZoomRect.origin.x - (index % lineNumber) * (zoomView_W + lineSpacing);//X坐标
+        CGFloat margin_Y = _tempImageZoomRect.origin.y;
+        for (int i = 0; i < _dataSource.count; i ++) {
+            int row = i / lineNumber;//行号
+            int loc = i % lineNumber;//列号
+            CGFloat zoomView_X = margin_X + (lineSpacing + zoomView_W) * loc;
+            CGFloat zoomView_Y = margin_Y + (lineSpacing + zoomView_H) * row;
+            
+            [_zoomRectArray addObject:[NSValue valueWithCGRect:CGRectMake(zoomView_X, zoomView_Y, zoomView_W, zoomView_H)]];
+        }
     }
     
     _pageControl.currentPage = index;
@@ -121,7 +140,7 @@
         [weakSelf.view.window addSubview:tempImageView];
         [weakSelf dismissViewControllerAnimated:NO completion:nil];
         
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.5f animations:^{
             tempImageView.frame = _tempImageZoomRect;
             tempImageView.alpha = 0;
             

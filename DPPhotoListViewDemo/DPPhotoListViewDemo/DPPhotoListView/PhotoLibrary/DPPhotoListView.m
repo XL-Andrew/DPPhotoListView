@@ -196,7 +196,11 @@
             photoBrowser.dataSource = _dataSource;
         }
         photoBrowser.zoomViewRect = cellInSuperview;
-        [photoBrowser shwoPhotoBrowserAtIndex:indexPath.row];
+        if (_photoScrollDirection == DPPhotoScrollDirectionVertical) {
+            [photoBrowser shwoPhotoBrowserAtIndex:indexPath.row shadowDirection:DPPhotoShadowDirectionVertical];
+        } else {
+            [photoBrowser shwoPhotoBrowserAtIndex:indexPath.row shadowDirection:DPPhotoShadowDirectionHorizontal];
+        }
     }
     [_mainCollectionView reloadData];
 }
