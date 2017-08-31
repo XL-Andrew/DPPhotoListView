@@ -14,9 +14,13 @@
 @interface DPPhotoBrowser () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIActionSheetDelegate>
 {
     UICollectionView *_mainCollectionView;
-    NSMutableArray *_dataSource;
     UIPageControl *_pageControl;
-    UIImage __block *_saveImage;
+    NSMutableArray *_dataSource;
+    
+    UIImage __block *_saveImage;    //保存的图片
+    
+    CGRect _tempImageZoomRect;      //缩放图片rect
+    NSMutableArray *_zoomRectArray; //缩放图片rect数组
 }
 
 @end
@@ -38,21 +42,42 @@
     _mainCollectionView.delegate = self;
     _mainCollectionView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_mainCollectionView];
-    
+#if __has_include(<Masonry/Masonry.h>)
     [_mainCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
+#else
+    _mainCollectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+#endif
     
     _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
     _pageControl.center = CGPointMake(SCREEN_WIDTH / 2.0, SCREEN_HEIGHT - _pageControl.frame.size.height);
     _pageControl.numberOfPages = _dataSource.count;
     [self.view addSubview:_pageControl];
+    
 }
 
 #pragma mark -  public
 //显示图片浏览器
 - (void)shwoPhotoBrowserAtIndex:(NSUInteger)index
 {
+    //模拟设置回缩影像位置
+    _zoomRectArray = [NSMutableArray array];
+    int lineNumber = SCREEN_WIDTH / (_tempImageZoomRect.size.width + 1) > 0?:1;//每行多少view
+    int lineSpacing = ((int)SCREEN_WIDTH % (int)_tempImageZoomRect.size.width) / (lineNumber + 1);
+    CGFloat zoomView_W = _tempImageZoomRect.size.width;//宽
+    CGFloat zoomView_H = _tempImageZoomRect.size.width;//高
+    CGFloat margin_X = _tempImageZoomRect.origin.x - (index % lineNumber) * (zoomView_W + lineSpacing);//X坐标
+    CGFloat margin_Y = _tempImageZoomRect.origin.y - (index / lineNumber) * (zoomView_W + lineSpacing);//Y坐标
+    for (int i = 0; i < _dataSource.count; i ++) {
+        int row = i / lineNumber;//行号
+        int loc = i % lineNumber;//列号
+        CGFloat zoomView_X = margin_X + (lineSpacing + zoomView_W) * loc;
+        CGFloat zoomView_Y = margin_Y + (lineSpacing + zoomView_H) * row;
+        
+        [_zoomRectArray addObject:[NSValue valueWithCGRect:CGRectMake(zoomView_X, zoomView_Y, zoomView_W, zoomView_H)]];
+    }
+    
     _pageControl.currentPage = index;
     [self.view layoutIfNeeded];
     [_mainCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
@@ -64,6 +89,11 @@
 - (void)setDataSource:(NSMutableArray *)dataSource
 {
     _dataSource = dataSource;
+}
+
+- (void)setZoomViewRect:(CGRect)zoomViewRect
+{
+    _tempImageZoomRect = zoomViewRect;
 }
 
 #pragma mark -  UICollectionViewDelegate
@@ -78,6 +108,8 @@
     static NSString *CellIdentifier = @"DPPhotoBrowserCollectionViewCell";
     DPPhotoBrowserCollectionViewCell __weak *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.photo = [_dataSource objectAtIndex:indexPath.row];
+    
+    //点击图片后缩放
     cell.singleTapClickBlock = ^{
         
         UIImageView *tempImageView = [[UIImageView alloc] init];
@@ -86,21 +118,17 @@
         tempImageView.frame = CGRectMake(cell.photoImageView.bounds.origin.x, cell.photoImageView.bounds.origin.y, cell.photoImageView.bounds.size.width, cell.photoImageView.bounds.size.height);
         tempImageView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         tempImageView.image = cell.photoImageView.image;
-        [self.view.window addSubview:tempImageView];
+        [weakSelf.view.window addSubview:tempImageView];
+        [weakSelf dismissViewControllerAnimated:NO completion:nil];
         
-        [self dismissViewControllerAnimated:NO completion:nil];
-        
-        [UIView animateWithDuration:0.4 animations:^{
-            
-            tempImageView.frame = self.zoomViewRect;
+        [UIView animateWithDuration:0.5 animations:^{
+            tempImageView.frame = _tempImageZoomRect;
             tempImageView.alpha = 0;
             
         } completion:^(BOOL finished) {
-            
             [tempImageView removeFromSuperview];
         }];
         
-        [weakSelf dismissViewControllerAnimated:NO completion:nil];
     };
     
     cell.longPressClickBlock = ^(UIImage *tempSaveImage) {
@@ -119,6 +147,12 @@
 {
     int index = scrollView.contentOffset.x / scrollView.bounds.size.width;
     _pageControl.currentPage = index;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    int index = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    _tempImageZoomRect = [[_zoomRectArray objectAtIndex:index] CGRectValue];
 }
 
 #pragma mark -  UIActionSheetDelegate

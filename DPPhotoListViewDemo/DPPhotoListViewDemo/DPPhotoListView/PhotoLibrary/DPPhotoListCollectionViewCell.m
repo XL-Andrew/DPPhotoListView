@@ -108,9 +108,9 @@
 #endif
         }
         //base64编码格式图片
-        else if ([photo hasPrefix:@"data:image/jpg;base64,"]) {
-            NSData *data = [[NSData alloc]initWithBase64EncodedString:[photo stringByReplacingOccurrencesOfString:@"data:image/jpg;base64," withString:@""] options:0];
-            self.photoImageView.image = [[UIImage alloc]initWithData:data];
+        else if ([photo hasPrefix:@"data:image"]) {
+            NSData *imageData = [NSData dataWithBase64String:photo];
+            self.photoImageView.image = [UIImage imageWithData:imageData];
         }
         //本地图片
         else if ([UIImage imageNamed:photo]) {

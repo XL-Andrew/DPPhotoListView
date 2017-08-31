@@ -15,6 +15,8 @@
 
 #import "UIView+DPCategory.h"
 
+#import "NSData+DPBase64String.h"
+
 #import "DPPhotoUtils.h"
 
 //占位图

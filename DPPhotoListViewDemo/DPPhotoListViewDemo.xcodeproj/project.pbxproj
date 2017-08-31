@@ -11,6 +11,8 @@
 		4960D1C21F4E74ED0004499B /* localPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 4960D1C11F4E74ED0004499B /* localPic.png */; };
 		49EC24661F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC24651F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m */; };
 		49EC24721F57F91D00E9808C /* DPPhoto_library_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC24711F57F91D00E9808C /* DPPhoto_library_delete.png */; };
+		49EC247C1F57FE0800E9808C /* base64string.txt in Resources */ = {isa = PBXBuildFile; fileRef = 49EC247B1F57FE0800E9808C /* base64string.txt */; };
+		49EC247F1F58078100E9808C /* NSData+DPBase64String.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC247E1F58078100E9808C /* NSData+DPBase64String.m */; };
 		49F2DDAE1F4D28CA007B0CB7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDAD1F4D28CA007B0CB7 /* main.m */; };
 		49F2DDB11F4D28CA007B0CB7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDB01F4D28CA007B0CB7 /* AppDelegate.m */; };
 		49F2DDB41F4D28CA007B0CB7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2DDB31F4D28CA007B0CB7 /* ViewController.m */; };
@@ -35,6 +37,9 @@
 		49EC24641F57BE9C00E9808C /* UIScrollView+DPTouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DPTouchEvent.h"; sourceTree = "<group>"; };
 		49EC24651F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DPTouchEvent.m"; sourceTree = "<group>"; };
 		49EC24711F57F91D00E9808C /* DPPhoto_library_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPPhoto_library_delete.png; sourceTree = "<group>"; };
+		49EC247B1F57FE0800E9808C /* base64string.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = base64string.txt; sourceTree = "<group>"; };
+		49EC247D1F58078100E9808C /* NSData+DPBase64String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DPBase64String.h"; sourceTree = "<group>"; };
+		49EC247E1F58078100E9808C /* NSData+DPBase64String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DPBase64String.m"; sourceTree = "<group>"; };
 		49F2DDA91F4D28CA007B0CB7 /* DPPhotoListViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DPPhotoListViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49F2DDAD1F4D28CA007B0CB7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49F2DDAF1F4D28CA007B0CB7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +119,7 @@
 				49F2DDB21F4D28CA007B0CB7 /* ViewController.h */,
 				49F2DDB31F4D28CA007B0CB7 /* ViewController.m */,
 				4960D1C11F4E74ED0004499B /* localPic.png */,
+				49EC247B1F57FE0800E9808C /* base64string.txt */,
 				49F2DDEC1F4D2B55007B0CB7 /* PrefixHeader.pch */,
 				49F2DDB51F4D28CA007B0CB7 /* Main.storyboard */,
 				49F2DDB81F4D28CA007B0CB7 /* Assets.xcassets */,
@@ -163,6 +169,8 @@
 				49EC24651F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m */,
 				49F2DDF01F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.h */,
 				49F2DDF11F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.m */,
+				49EC247D1F58078100E9808C /* NSData+DPBase64String.h */,
+				49EC247E1F58078100E9808C /* NSData+DPBase64String.m */,
 				49F2DDF21F4D2D7B007B0CB7 /* UIView+DPCategory.h */,
 				49F2DDF31F4D2D7B007B0CB7 /* UIView+DPCategory.m */,
 			);
@@ -263,6 +271,7 @@
 			files = (
 				49F2DDBC1F4D28CA007B0CB7 /* LaunchScreen.storyboard in Resources */,
 				49F2DDB91F4D28CA007B0CB7 /* Assets.xcassets in Resources */,
+				49EC247C1F57FE0800E9808C /* base64string.txt in Resources */,
 				4960D1C21F4E74ED0004499B /* localPic.png in Resources */,
 				49F2DDCA1F4D2A0E007B0CB7 /* DPPhoto_library_more.png in Resources */,
 				49F2DDB71F4D28CA007B0CB7 /* Main.storyboard in Resources */,
@@ -334,6 +343,7 @@
 				49F2DDB11F4D28CA007B0CB7 /* AppDelegate.m in Sources */,
 				49F2DE1C1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m in Sources */,
 				49F2DDFD1F4D2DD6007B0CB7 /* DPPhotoListView.m in Sources */,
+				49EC247F1F58078100E9808C /* NSData+DPBase64String.m in Sources */,
 				49F2DDF41F4D2D7B007B0CB7 /* DPPhotoUtils.m in Sources */,
 				49F2DDAE1F4D28CA007B0CB7 /* main.m in Sources */,
 				49F2DDFC1F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m in Sources */,

@@ -33,9 +33,13 @@
     photoZoomScrollView.minimumZoomScale = 1.0;
     [self addSubview:photoZoomScrollView];
     
+#if __has_include(<Masonry/Masonry.h>)
     [photoZoomScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
+#else
+    photoZoomScrollView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+#endif
     
     _photoImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
     _photoImageView.userInteractionEnabled = YES;
@@ -87,9 +91,9 @@
 #endif
         }
         //base64编码格式图片
-        else if ([photo hasPrefix:@"data:image/jpg;base64,"]) {
-            NSData *data = [[NSData alloc]initWithBase64EncodedString:[photo stringByReplacingOccurrencesOfString:@"data:image/jpg;base64," withString:@""] options:0];
-            self.photoImageView.image = [[UIImage alloc]initWithData:data];
+        else if ([photo hasPrefix:@"data:image"]) {
+            NSData *imageData = [NSData dataWithBase64String:photo];
+            self.photoImageView.image = [UIImage imageWithData:imageData];
         }
         //本地图片
         else if ([UIImage imageNamed:photo]) {

@@ -41,11 +41,20 @@
                           @"http://pic1.win4000.com/wallpaper/7/58b66db8cf6d9.jpg",
                           @"http://pic1.win4000.com/wallpaper/9/58d5e2ccbdce9.jpg",
                           @"http://pic1.win4000.com/wallpaper/d/589ea2dd5870c.jpg",
-                          @"localPic"];
-
-
+                          
+                          //工程图片
+                          @"localPic",
+                          
+                          //图片路径
+                          [[NSBundle mainBundle] pathForResource:@"localPic" ofType:@"png"],
+                          
+                          //base64编码格式图片
+                          [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base64string" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil]
+                          ];
+    
     //stpe 4 (竖列表展示方式)
     photoListView = [[DPPhotoListView alloc]initWithFrame:CGRectMake(0, 64 + 20, self.view.bounds.size.width, SCREEN_HEIGHT - 64 - 20) numberOfCellInRow:3 lineSpacing:15 dataSource:[urlArray mutableCopy]];
+    photoListView.photoScrollDirection = DPPhotoScrollDirectionHorizontal;
     photoListView.showAddImagesButton = YES;
     photoListView.allowLongPressEditPhoto = YES;
     photoListView.delegate = self;
@@ -54,8 +63,9 @@
     //com.andrew.DPPhotoListViewDemo
     //step 4 (横列表展示方式)
 //    photoListView = [[DPPhotoListView alloc]initWithFrame:CGRectMake(0, 64 + 20, self.view.bounds.size.width, 100) numberOfCellInRow:3 lineSpacing:15 dataSource:[urlArray mutableCopy]];
-//    photoListView.showAddImagesButton = YES;
 //    photoListView.photoScrollDirection = DPPhotoScrollDirectionHorizontal;
+//    photoListView.showAddImagesButton = YES;
+//    photoListView.allowLongPressEditPhoto = YES;
 //    photoListView.delegate = self;
 //    [self.view addSubview:photoListView];
     
