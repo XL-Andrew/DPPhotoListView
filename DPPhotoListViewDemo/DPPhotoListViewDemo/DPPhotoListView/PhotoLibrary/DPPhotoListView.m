@@ -10,6 +10,7 @@
 #import "DPPhotoListCollectionViewCell.h"
 #import "DPPhotoBrowser.h"
 #import "DPPhotoLibrary.h"
+#import "UIScrollView+DPTouchEvent.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
@@ -21,11 +22,11 @@
 
 @interface  DPPhotoListView () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
-    NSUInteger                  _lineNumber;
-    CGFloat                     _lineSpacing;
-    NSMutableArray              __block *_dataSource;
-    BOOL                        _showDeleteButton;
-//    BOOL                        _showAddImagesButton;
+    NSUInteger                  _lineNumber;            //每行cell个数
+    CGFloat                     _lineSpacing;           //列间距
+    NSMutableArray              __block *_dataSource;   //数据源
+    BOOL                        _isShowingDeleteButton; //是否显示删除按钮
+    
     UICollectionView            *_mainCollectionView;
     UICollectionViewFlowLayout  *_flowLayout;
 }
@@ -37,6 +38,7 @@
 - (instancetype)initWithFrame:(CGRect)frame numberOfCellInRow:(NSUInteger)lineNumber lineSpacing:(CGFloat)lineSpacing dataSource:(NSMutableArray *)dataSource
 {
     if (self = [super initWithFrame:frame]) {
+        self.userInteractionEnabled = YES;
         _lineNumber = lineNumber;
         _lineSpacing = lineSpacing;
         _dataSource = dataSource;
@@ -49,7 +51,7 @@
 - (void)createSubviews
 {
     _flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    _flowLayout.minimumLineSpacing = _lineSpacing; //上下的间距 可以设置0看下效果
+    _flowLayout.minimumLineSpacing = _lineSpacing;
     _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     _flowLayout.itemSize = CGSizeMake((self.bounds.size.width - (_lineNumber + 1) * _lineSpacing) / _lineNumber, (self.bounds.size.width - (_lineNumber + 1) * _lineSpacing) / _lineNumber);
     
@@ -57,39 +59,60 @@
     _mainCollectionView.backgroundColor = [UIColor whiteColor];
     _mainCollectionView.delegate = self;
     _mainCollectionView.dataSource = self;
+    _mainCollectionView.userInteractionEnabled = YES;
     _mainCollectionView.showsVerticalScrollIndicator = NO;
     _mainCollectionView.showsHorizontalScrollIndicator = NO;
     [_mainCollectionView registerClass:[DPPhotoListCollectionViewCell class] forCellWithReuseIdentifier:@"DPPhotoListCollectionViewCell"];
     [self addSubview:_mainCollectionView];
     
-    
+#if __has_include(<Masonry/Masonry.h>)
     [_mainCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).with.offset(_lineSpacing);
         make.top.mas_equalTo(self.mas_top);
         make.width.mas_equalTo(self.mas_width).with.offset(- 2 * _lineSpacing);
         make.height.mas_equalTo(self.mas_height);
     }];
+#else
+    _mainCollectionView.frame = CGRectMake(_lineSpacing, 0, self.bounds.size.width - 2 * _lineSpacing, self.bounds.size.height);
+#endif
 }
 
 #pragma mark -  public
-//开启编辑图片
-- (void)editPhoto
+
+- (void)autoEditPhoto
 {
-    if (_showDeleteButton) {
-        _showDeleteButton = NO;
+    if (_isShowingDeleteButton) {
+        _isShowingDeleteButton = NO;
     } else {
-        _showDeleteButton = YES;
+        _isShowingDeleteButton = YES;
     }
+    [_mainCollectionView reloadData];
+}
+
+//开启编辑图片
+- (void)startEditPhoto
+{
+    _isShowingDeleteButton = YES;
+    [_mainCollectionView reloadData];
+}
+
+//结束编辑
+- (void)endEditPhoto
+{
+    _isShowingDeleteButton = NO;
     [_mainCollectionView reloadData];
 }
 
 //设置滚动方式
 - (void)setPhotoScrollDirection:(DPPhotoScrollDirection)photoScrollDirection
 {
+    //水平滚动
     if (photoScrollDirection == DPPhotoScrollDirectionHorizontal) {
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _flowLayout.itemSize = CGSizeMake(self.bounds.size.height, self.bounds.size.height);
         [_mainCollectionView setCollectionViewLayout:_flowLayout];
+        
+    //竖直滚动
     } else if (photoScrollDirection == DPPhotoScrollDirectionVertical) {
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _flowLayout.itemSize = CGSizeMake((self.bounds.size.width - (_lineNumber + 1) * _lineSpacing) / _lineNumber, (self.bounds.size.width - (_lineNumber + 1) * _lineSpacing) / _lineNumber);
@@ -117,12 +140,10 @@
 {
     static NSString *CellIdentifier = @"DPPhotoListCollectionViewCell";
     DPPhotoListCollectionViewCell __weak *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.photoURL = [_dataSource objectAtIndex:indexPath.row];
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
-    longPress.minimumPressDuration = 1.0;
-    [cell addGestureRecognizer:longPress];
+    cell.photo = [_dataSource objectAtIndex:indexPath.row];
     
-    if (_showDeleteButton) {
+    
+    if (_isShowingDeleteButton) {
         cell.showDeleteButton = YES;
         if (indexPath.row == _dataSource.count - 1 && _showAddImagesButton) {
             cell.showDeleteButton = NO;
@@ -131,6 +152,13 @@
         cell.showDeleteButton = NO;
     }
 
+    //长按编辑
+    if (_allowLongPressEditPhoto) {
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+        longPress.minimumPressDuration = 1.0;
+        [cell addGestureRecognizer:longPress];
+    }
+    
     //点击删除回调
     cell.deleteButtonClickBlock = ^{
         NSIndexPath *indexPath = [_mainCollectionView indexPathForCell:cell];
@@ -149,7 +177,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    _showDeleteButton = NO;
+    _isShowingDeleteButton = NO;
     if (indexPath.row == _dataSource.count - 1 && _showAddImagesButton) { //添加照片
         
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"照片审核\n清晰/美观/本人/生活照\n严禁盗图/涉及色情违规等直接封号" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册", nil];
@@ -180,8 +208,8 @@
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture
 {
-    if (!_showDeleteButton) {
-        [self editPhoto];
+    if (!_isShowingDeleteButton) {
+        [self startEditPhoto];
     }
 }
 
@@ -239,7 +267,7 @@
     }];
     
     //插入数组
-    [_dataSource insertObject:[UIImagePNGRepresentation(image) base64EncodedStringWithOptions:0] atIndex:_dataSource.count - 1];
+    [_dataSource insertObject:image atIndex:_dataSource.count - 1];
     NSIndexPath *path = [NSIndexPath indexPathForItem:_dataSource.count - 2 inSection:0];
     [_mainCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:path]];
     
@@ -262,6 +290,16 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    if ([touch.view isKindOfClass:[UICollectionView class]]) {
+        if (_isShowingDeleteButton) {
+            [self endEditPhoto];
+        }
+    }
 }
 
 @end

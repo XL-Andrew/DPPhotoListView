@@ -47,9 +47,11 @@
     //stpe 4 (竖列表展示方式)
     photoListView = [[DPPhotoListView alloc]initWithFrame:CGRectMake(0, 64 + 20, self.view.bounds.size.width, SCREEN_HEIGHT - 64 - 20) numberOfCellInRow:3 lineSpacing:15 dataSource:[urlArray mutableCopy]];
     photoListView.showAddImagesButton = YES;
+    photoListView.allowLongPressEditPhoto = YES;
     photoListView.delegate = self;
     [self.view addSubview:photoListView];
     
+    //com.andrew.DPPhotoListViewDemo
     //step 4 (横列表展示方式)
 //    photoListView = [[DPPhotoListView alloc]initWithFrame:CGRectMake(0, 64 + 20, self.view.bounds.size.width, 100) numberOfCellInRow:3 lineSpacing:15 dataSource:[urlArray mutableCopy]];
 //    photoListView.showAddImagesButton = YES;
@@ -63,7 +65,7 @@
 {
     //step 5
     //点击编辑图片按钮
-    [photoListView editPhoto];
+    [photoListView autoEditPhoto];
 }
 
 //step 6 代理方法

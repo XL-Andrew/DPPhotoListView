@@ -57,6 +57,14 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic, assign) BOOL showAddImagesButton;
 
+
+/**
+ 是否允许长按编辑图片
+ 
+ default is NO
+ */
+@property (nonatomic, assign) BOOL allowLongPressEditPhoto;
+
 /**
  初始化方法
 
@@ -68,9 +76,21 @@ typedef enum : NSUInteger {
  */
 - (instancetype)initWithFrame:(CGRect)frame numberOfCellInRow:(NSUInteger)lineNumber lineSpacing:(CGFloat)lineSpacing dataSource:(NSMutableArray *)dataSource;
 
+
 /**
- 编辑删除
+ 自动判断当前编辑状态,如果是未编辑就开启编辑,如果已开启编辑就结束编辑
  */
-- (void)editPhoto;
+- (void)autoEditPhoto;
+
+/**
+ 开始编辑
+ */
+- (void)startEditPhoto;
+
+
+/**
+ 结束编辑
+ */
+- (void)endEditPhoto;
 
 @end

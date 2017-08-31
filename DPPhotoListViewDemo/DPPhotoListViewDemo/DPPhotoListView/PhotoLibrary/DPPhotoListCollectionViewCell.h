@@ -18,6 +18,6 @@ typedef void(^DeleteButtonClickBlock)();
 
 @property (nonatomic, assign) BOOL showDeleteButton;
 
-@property (nonatomic, copy) NSString *photoURL;
+@property (nonatomic, strong) id photo;
 
 @end

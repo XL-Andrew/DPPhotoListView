@@ -58,50 +58,64 @@
 }
 
 #pragma mark -  publick
-- (void)setBrowserPhotoURL:(NSString *)browserPhotoURL
+- (void)setPhoto:(id)photo
 {
-    if ([browserPhotoURL hasPrefix:@"http"]) {
+    if ([photo isKindOfClass:[NSString class]]) {
         
-        //识别YYWebImageView
-        
-        if ([self.photoImageView respondsToSelector:@selector(setImageWithURL:placeholder:options:completion:)]) {
-            [self.photoImageView performSelector:@selector(setImageWithURL:placeholder:options:completion:) withObjects:@[[NSURL URLWithString:browserPhotoURL], Placeholder_Image, @4096]];
-        }
-        
-        //识别SDWebImageView
-        
-        else if ([self.photoImageView respondsToSelector:@selector(sd_setImageWithURL:placeholderImage:)]) {
-            [self.photoImageView performSelector:@selector(sd_setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:browserPhotoURL] withObject:Placeholder_Image];
-        }
-        
-        //当不存在YYWebImageView && SDWebImageView 系统默认加载方法，无缓存方案
-        
-        else {
+        //网络图片
+        if ([photo hasPrefix:@"http"]) {
+            
+            //识别SDWebImageView
+#if __has_include(<SDWebImage/UIImageView+WebCache.h>)
+            [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:photo] placeholderImage:Placeholder_Image];
+#else
+            
+            //识别YYWebImageView
+#if __has_include(<YYKit/UIImageView+YYWebImage.h>)
+            [_photoImageView setImageWithURL:[NSURL URLWithString:photo] placeholder:Placeholder_Image options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
+#else
+            //当不存在YYWebImageView && SDWebImageView 系统默认加载方法，无缓存方案
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 //通知主线程刷新
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:browserPhotoURL]];
+                    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:photo]];
                     self.photoImageView.image = [UIImage imageWithData:data];
                 });
                 
             });
+#endif
+#endif
+        }
+        //base64编码格式图片
+        else if ([photo hasPrefix:@"data:image/jpg;base64,"]) {
+            NSData *data = [[NSData alloc]initWithBase64EncodedString:[photo stringByReplacingOccurrencesOfString:@"data:image/jpg;base64," withString:@""] options:0];
+            self.photoImageView.image = [[UIImage alloc]initWithData:data];
+        }
+        //本地图片
+        else if ([UIImage imageNamed:photo]) {
+            self.photoImageView.image = [UIImage imageNamed:photo];
+        }
+        //data字符串
+        else if ([photo dataUsingEncoding:NSUTF8StringEncoding]) {
+            self.photoImageView.image = [[UIImage alloc]initWithData:[photo dataUsingEncoding:NSUTF8StringEncoding]];
+        } else {
+            self.photoImageView.image = Placeholder_Image;
         }
     }
-    
-    //本地图片展示
-    
-    else if ([UIImage imageNamed:browserPhotoURL]) {
-        self.photoImageView.image = [UIImage imageNamed:browserPhotoURL];
+    //UIImage 类型
+    else if ([photo isKindOfClass:[UIImage class]]) {
+        self.photoImageView.image = photo;
     }
-    
-    //base64编码格式图片
-    
+    //NSData 类型
+    else if ([photo isKindOfClass:[NSData class]]) {
+        self.photoImageView.image = [[UIImage alloc]initWithData:photo];
+    }
+    //unknown
     else {
-        NSData *data = [[NSData alloc]initWithBase64EncodedString:browserPhotoURL options:0];
-        self.photoImageView.image = [UIImage imageWithData:data];
+        self.photoImageView.image = Placeholder_Image;
     }
     
-    _photoImageView.frame = [self setImageViewFrameWithImage:_photoImageView.image];
+     _photoImageView.frame = [self setImageViewFrameWithImage:_photoImageView.image];
 }
 
 #pragma mark -  手势事件

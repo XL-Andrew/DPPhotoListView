@@ -56,7 +56,7 @@
     _pageControl.currentPage = index;
     [self.view layoutIfNeeded];
     [_mainCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-    UIViewController *topVC = [DPPhotoUtils currentViewController];
+    UIViewController *topVC = [self currentViewController];
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [topVC presentViewController:self animated:YES completion:nil];
 }
@@ -77,19 +77,20 @@
     __weak __typeof(&*self) weakSelf = self;
     static NSString *CellIdentifier = @"DPPhotoBrowserCollectionViewCell";
     DPPhotoBrowserCollectionViewCell __weak *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.browserPhotoURL = [_dataSource objectAtIndex:indexPath.row];
+    cell.photo = [_dataSource objectAtIndex:indexPath.row];
     cell.singleTapClickBlock = ^{
         
         UIImageView *tempImageView = [[UIImageView alloc] init];
         tempImageView.layer.cornerRadius = 4;
         tempImageView.clipsToBounds = YES;
-        tempImageView.frame = CGRectMake(cell.photoImageView.bounds.origin.x, cell.photoImageView.bounds.origin.y, cell.photoImageView.bounds.size.width, cell.photoImageView.bounds.size.width);
+        tempImageView.frame = CGRectMake(cell.photoImageView.bounds.origin.x, cell.photoImageView.bounds.origin.y, cell.photoImageView.bounds.size.width, cell.photoImageView.bounds.size.height);
+        tempImageView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         tempImageView.image = cell.photoImageView.image;
         [self.view.window addSubview:tempImageView];
         
         [self dismissViewControllerAnimated:NO completion:nil];
         
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
             
             tempImageView.frame = self.zoomViewRect;
             tempImageView.alpha = 0;
@@ -183,6 +184,22 @@
     
     [alertController addAction:okAction];
     [alertController addAction:cancelAction];
+}
+
+- (UIViewController *)currentViewController
+{
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    UIViewController *vc = keyWindow.rootViewController;
+    while (vc.presentedViewController) {
+        vc = vc.presentedViewController;
+        
+        if ([vc isKindOfClass:[UINavigationController class]]) {
+            vc = [(UINavigationController *)vc visibleViewController];
+        } else if ([vc isKindOfClass:[UITabBarController class]]) {
+            vc = [(UITabBarController *)vc selectedViewController];
+        }
+    }
+    return vc;
 }
 
 - (void)didReceiveMemoryWarning {

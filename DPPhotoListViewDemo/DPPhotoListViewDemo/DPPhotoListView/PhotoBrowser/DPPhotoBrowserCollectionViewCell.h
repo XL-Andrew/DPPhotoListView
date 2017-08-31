@@ -18,7 +18,7 @@ typedef void(^LongPressClickBlock)(UIImage *tempSaveImage);
 
 @property (nonatomic, copy) LongPressClickBlock longPressClickBlock;
 
-@property (nonatomic, strong) NSString *browserPhotoURL;
+@property (nonatomic, strong) id photo;
 
 @property (nonatomic, strong, readonly) UIImageView *photoImageView;
 

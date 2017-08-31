@@ -33,4 +33,6 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #endif
 
+#define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
 #endif /* DPPhotoLibrary_h */
