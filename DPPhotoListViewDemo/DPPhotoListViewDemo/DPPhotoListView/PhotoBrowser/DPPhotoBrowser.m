@@ -107,7 +107,7 @@
 
 - (void)setDataSource:(NSMutableArray *)dataSource
 {
-    _dataSource = dataSource;
+    _dataSource = [dataSource mutableCopy];
 }
 
 - (void)setZoomViewRect:(CGRect)zoomViewRect

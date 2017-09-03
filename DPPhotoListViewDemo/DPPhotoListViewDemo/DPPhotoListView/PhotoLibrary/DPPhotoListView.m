@@ -41,7 +41,7 @@
         self.userInteractionEnabled = YES;
         _lineNumber = lineNumber;
         _lineSpacing = lineSpacing;
-        _dataSource = dataSource;
+        _dataSource = [dataSource mutableCopy];
         
         [self createSubviews];
     }
