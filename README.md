@@ -1,5 +1,12 @@
 #DPPhotoListView
 
+#DPPhotoListView
+
+#截图展示
+
+
+![竖列表展示方式](http://upload-images.jianshu.io/upload_images/4842734-7e0af7bda7086fd2.gif?imageMogr2/auto-orient/strip)  
+![横列表展示方式](http://upload-images.jianshu.io/upload_images/4842734-26209ebb35eb71f7.gif?imageMogr2/auto-orient/strip)
 网络&本地图片列表展示器，图片浏览器功能整合。网络图片解析支持SDWebImage和UIImageView+YYWebImage，集成其中一个就可以，会自动选择，如果两个三方库都没有就会用自带方法Data转Image方式，最简单的备用方法，暂时不带cache功能。（现在很少有人会不用SD或者YYKit吧。。。😂😂😂）
 
 #安装方法
@@ -13,9 +20,16 @@ DPPhotoListView
 |____Utils (工具类)
 |____Resource (图片资源)
 
-[简书地址](http://www.jianshu.com/u/37af3b7d7840)  
-
 [Demo地址](https://github.com/XL-Andrew/DPPhotoListView)
+
+#支持图片类型
+
+* URL网络图片（支持）
+* Base64编码格式图片（支持）
+* 工程本地图片（支持）
+* 本地图片路径（支持）
+* NSData类型（支持）
+* UIImage类型（支持）
 
 #使用方法
 
@@ -93,15 +107,31 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL showAddImagesButton;
 ```
 
-####7.开启编辑
+####7.支持长按进入编辑模式
 
 ```
 /**
- 编辑删除
+ 是否允许长按编辑图片
+ 
+ default is NO
  */
-- (void)editPhoto;
+@property (nonatomic, assign) BOOL allowLongPressEditPhoto;
 ```
+####8.开启编辑
 
-#截图展示
+```
+/**
+ 自动判断当前编辑状态,如果是未编辑就开启编辑,如果已开启编辑就结束编辑
+ */
+- (void)autoEditPhoto;
 
-![竖列表展示方式.gif](http://upload-images.jianshu.io/upload_images/4842734-a84ab0a7736c4c72.gif?imageMogr2/auto-orient/strip)![横列表展示方式.gif](http://upload-images.jianshu.io/upload_images/4842734-2af0482466cd463b.gif?imageMogr2/auto-orient/strip)
+/**
+ 开始编辑
+ */
+- (void)startEditPhoto;
+
+/**
+ 结束编辑
+ */
+- (void)endEditPhoto;
+```
