@@ -1,5 +1,5 @@
 platform :ios, '7.0'
 target 'DPPhotoListViewDemo' do
-pod 'Masonry'
-pod 'YYKit'
+pod 'Masonry',:inhibit_warnings => true
+pod 'YYKit',:inhibit_warnings => true
 end

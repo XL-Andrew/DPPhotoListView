@@ -8,7 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		13F0602E2C9E94E851311BAD /* libPods-DPPhotoListViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */; };
+		4927523F1F624D1B0060F171 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927523E1F624D1B0060F171 /* UIViewController+BackButtonHandler.m */; };
 		4960D1C21F4E74ED0004499B /* localPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 4960D1C11F4E74ED0004499B /* localPic.png */; };
+		49CF5A101F5F95960064039B /* DPPhotoChooseToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A031F5F95960064039B /* DPPhotoChooseToolBar.m */; };
+		49CF5A1E1F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A191F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m */; };
+		49CF5A1F1F5F972C0064039B /* DPPhotoAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A1B1F5F972C0064039B /* DPPhotoAlbumsViewController.m */; };
+		49CF5A201F5F972C0064039B /* DPPhotoAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A1D1F5F972C0064039B /* DPPhotoAlbumModel.m */; };
+		49CF5A251F5F97320064039B /* DPPhotoChooseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A221F5F97320064039B /* DPPhotoChooseViewCell.m */; };
+		49CF5A261F5F97320064039B /* DPPhotoChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A241F5F97320064039B /* DPPhotoChooseViewController.m */; };
+		49CF5A291F5F97400064039B /* DPPhoto_choose_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CF5A271F5F97400064039B /* DPPhoto_choose_select.png */; };
+		49CF5A2A1F5F97400064039B /* DPPhoto_choose_unSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CF5A281F5F97400064039B /* DPPhoto_choose_unSelect.png */; };
+		49CF5A311F5FDA330064039B /* DPPhotoBrowserEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A301F5FDA330064039B /* DPPhotoBrowserEditor.m */; };
+		49CF5A341F5FDA490064039B /* DPPhotoBrowserEditorCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A331F5FDA490064039B /* DPPhotoBrowserEditorCollectionViewCell.m */; };
+		49E6DF691F60E3CD00A00464 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E6DF681F60E3CD00A00464 /* Photos.framework */; };
+		49E6DF6C1F60E53700A00464 /* DPPhotoBrowserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E6DF6B1F60E53700A00464 /* DPPhotoBrowserModel.m */; };
 		49EC24661F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC24651F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m */; };
 		49EC24721F57F91D00E9808C /* DPPhoto_library_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC24711F57F91D00E9808C /* DPPhoto_library_delete.png */; };
 		49EC247C1F57FE0800E9808C /* base64string.txt in Resources */ = {isa = PBXBuildFile; fileRef = 49EC247B1F57FE0800E9808C /* base64string.txt */; };
@@ -33,7 +46,30 @@
 /* Begin PBXFileReference section */
 		2CD9E3E04A95DDEB12E3BC06 /* Pods-DPPhotoListViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DPPhotoListViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DPPhotoListViewDemo/Pods-DPPhotoListViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DPPhotoListViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4927523D1F624D1B0060F171 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
+		4927523E1F624D1B0060F171 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		4960D1C11F4E74ED0004499B /* localPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = localPic.png; sourceTree = "<group>"; };
+		49CF5A021F5F95960064039B /* DPPhotoChooseToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoChooseToolBar.h; sourceTree = "<group>"; };
+		49CF5A031F5F95960064039B /* DPPhotoChooseToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoChooseToolBar.m; sourceTree = "<group>"; };
+		49CF5A181F5F972C0064039B /* DPPhotoAlbumsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoAlbumsTableViewCell.h; sourceTree = "<group>"; };
+		49CF5A191F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoAlbumsTableViewCell.m; sourceTree = "<group>"; };
+		49CF5A1A1F5F972C0064039B /* DPPhotoAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoAlbumsViewController.h; sourceTree = "<group>"; };
+		49CF5A1B1F5F972C0064039B /* DPPhotoAlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoAlbumsViewController.m; sourceTree = "<group>"; };
+		49CF5A1C1F5F972C0064039B /* DPPhotoAlbumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoAlbumModel.h; sourceTree = "<group>"; };
+		49CF5A1D1F5F972C0064039B /* DPPhotoAlbumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoAlbumModel.m; sourceTree = "<group>"; };
+		49CF5A211F5F97320064039B /* DPPhotoChooseViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoChooseViewCell.h; sourceTree = "<group>"; };
+		49CF5A221F5F97320064039B /* DPPhotoChooseViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoChooseViewCell.m; sourceTree = "<group>"; };
+		49CF5A231F5F97320064039B /* DPPhotoChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoChooseViewController.h; sourceTree = "<group>"; };
+		49CF5A241F5F97320064039B /* DPPhotoChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoChooseViewController.m; sourceTree = "<group>"; };
+		49CF5A271F5F97400064039B /* DPPhoto_choose_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPPhoto_choose_select.png; sourceTree = "<group>"; };
+		49CF5A281F5F97400064039B /* DPPhoto_choose_unSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPPhoto_choose_unSelect.png; sourceTree = "<group>"; };
+		49CF5A2F1F5FDA330064039B /* DPPhotoBrowserEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoBrowserEditor.h; sourceTree = "<group>"; };
+		49CF5A301F5FDA330064039B /* DPPhotoBrowserEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoBrowserEditor.m; sourceTree = "<group>"; };
+		49CF5A321F5FDA490064039B /* DPPhotoBrowserEditorCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoBrowserEditorCollectionViewCell.h; sourceTree = "<group>"; };
+		49CF5A331F5FDA490064039B /* DPPhotoBrowserEditorCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoBrowserEditorCollectionViewCell.m; sourceTree = "<group>"; };
+		49E6DF681F60E3CD00A00464 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		49E6DF6A1F60E53700A00464 /* DPPhotoBrowserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoBrowserModel.h; sourceTree = "<group>"; };
+		49E6DF6B1F60E53700A00464 /* DPPhotoBrowserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoBrowserModel.m; sourceTree = "<group>"; };
 		49EC24641F57BE9C00E9808C /* UIScrollView+DPTouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DPTouchEvent.h"; sourceTree = "<group>"; };
 		49EC24651F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DPTouchEvent.m"; sourceTree = "<group>"; };
 		49EC24711F57F91D00E9808C /* DPPhoto_library_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPPhoto_library_delete.png; sourceTree = "<group>"; };
@@ -76,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E6DF691F60E3CD00A00464 /* Photos.framework in Frameworks */,
 				13F0602E2C9E94E851311BAD /* libPods-DPPhotoListViewDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +127,55 @@
 				E8BB476FED3C473B434963C3 /* Pods-DPPhotoListViewDemo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		49CF59FF1F5F955D0064039B /* PhotoAlbums */ = {
+			isa = PBXGroup;
+			children = (
+				49CF5A161F5F96D40064039B /* Albums */,
+				49CF5A171F5F96D40064039B /* ChooseView */,
+				49CF5A2E1F5FDA140064039B /* BrowserEditor */,
+				49CF5A021F5F95960064039B /* DPPhotoChooseToolBar.h */,
+				49CF5A031F5F95960064039B /* DPPhotoChooseToolBar.m */,
+			);
+			path = PhotoAlbums;
+			sourceTree = "<group>";
+		};
+		49CF5A161F5F96D40064039B /* Albums */ = {
+			isa = PBXGroup;
+			children = (
+				49CF5A1A1F5F972C0064039B /* DPPhotoAlbumsViewController.h */,
+				49CF5A1B1F5F972C0064039B /* DPPhotoAlbumsViewController.m */,
+				49CF5A181F5F972C0064039B /* DPPhotoAlbumsTableViewCell.h */,
+				49CF5A191F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m */,
+				49CF5A1C1F5F972C0064039B /* DPPhotoAlbumModel.h */,
+				49CF5A1D1F5F972C0064039B /* DPPhotoAlbumModel.m */,
+			);
+			path = Albums;
+			sourceTree = "<group>";
+		};
+		49CF5A171F5F96D40064039B /* ChooseView */ = {
+			isa = PBXGroup;
+			children = (
+				49CF5A231F5F97320064039B /* DPPhotoChooseViewController.h */,
+				49CF5A241F5F97320064039B /* DPPhotoChooseViewController.m */,
+				49CF5A211F5F97320064039B /* DPPhotoChooseViewCell.h */,
+				49CF5A221F5F97320064039B /* DPPhotoChooseViewCell.m */,
+			);
+			path = ChooseView;
+			sourceTree = "<group>";
+		};
+		49CF5A2E1F5FDA140064039B /* BrowserEditor */ = {
+			isa = PBXGroup;
+			children = (
+				49CF5A2F1F5FDA330064039B /* DPPhotoBrowserEditor.h */,
+				49CF5A301F5FDA330064039B /* DPPhotoBrowserEditor.m */,
+				49CF5A321F5FDA490064039B /* DPPhotoBrowserEditorCollectionViewCell.h */,
+				49CF5A331F5FDA490064039B /* DPPhotoBrowserEditorCollectionViewCell.m */,
+				49E6DF6A1F60E53700A00464 /* DPPhotoBrowserModel.h */,
+				49E6DF6B1F60E53700A00464 /* DPPhotoBrowserModel.m */,
+			);
+			path = BrowserEditor;
 			sourceTree = "<group>";
 		};
 		49F2DDA01F4D28CA007B0CB7 = {
@@ -143,6 +229,7 @@
 			children = (
 				49F2DDF71F4D2DB6007B0CB7 /* PhotoLibrary */,
 				49F2DE011F4D6EA7007B0CB7 /* PhotoBrowser */,
+				49CF59FF1F5F955D0064039B /* PhotoAlbums */,
 				49F2DDED1F4D2D5E007B0CB7 /* Utils */,
 				49F2DDC41F4D2A07007B0CB7 /* Resource */,
 			);
@@ -152,6 +239,8 @@
 		49F2DDC41F4D2A07007B0CB7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				49CF5A271F5F97400064039B /* DPPhoto_choose_select.png */,
+				49CF5A281F5F97400064039B /* DPPhoto_choose_unSelect.png */,
 				49F2DDC51F4D2A0E007B0CB7 /* DPPhoto_library_holdImage.png */,
 				49EC24711F57F91D00E9808C /* DPPhoto_library_delete.png */,
 				49F2DDC71F4D2A0E007B0CB7 /* DPPhoto_library_more.png */,
@@ -165,6 +254,8 @@
 				49F2DDCB1F4D2A54007B0CB7 /* DPPhotoLibrary.h */,
 				49F2DDEE1F4D2D7B007B0CB7 /* DPPhotoUtils.h */,
 				49F2DDEF1F4D2D7B007B0CB7 /* DPPhotoUtils.m */,
+				4927523D1F624D1B0060F171 /* UIViewController+BackButtonHandler.h */,
+				4927523E1F624D1B0060F171 /* UIViewController+BackButtonHandler.m */,
 				49EC24641F57BE9C00E9808C /* UIScrollView+DPTouchEvent.h */,
 				49EC24651F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m */,
 				49F2DDF01F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.h */,
@@ -202,6 +293,7 @@
 		DB401EB1682E6AA2BEF83D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49E6DF681F60E3CD00A00464 /* Photos.framework */,
 				4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */,
 			);
 			name = Frameworks;
@@ -271,11 +363,13 @@
 			files = (
 				49F2DDBC1F4D28CA007B0CB7 /* LaunchScreen.storyboard in Resources */,
 				49F2DDB91F4D28CA007B0CB7 /* Assets.xcassets in Resources */,
+				49CF5A2A1F5F97400064039B /* DPPhoto_choose_unSelect.png in Resources */,
 				49EC247C1F57FE0800E9808C /* base64string.txt in Resources */,
 				4960D1C21F4E74ED0004499B /* localPic.png in Resources */,
 				49F2DDCA1F4D2A0E007B0CB7 /* DPPhoto_library_more.png in Resources */,
 				49F2DDB71F4D28CA007B0CB7 /* Main.storyboard in Resources */,
 				49F2DDC81F4D2A0E007B0CB7 /* DPPhoto_library_holdImage.png in Resources */,
+				49CF5A291F5F97400064039B /* DPPhoto_choose_select.png in Resources */,
 				49EC24721F57F91D00E9808C /* DPPhoto_library_delete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,14 +432,24 @@
 				49F2DDF51F4D2D7B007B0CB7 /* NSObject+DPPerformSEL.m in Sources */,
 				49F2DE1B1F4D8B14007B0CB7 /* DPPhotoBrowser.m in Sources */,
 				49F2DDB41F4D28CA007B0CB7 /* ViewController.m in Sources */,
+				49CF5A341F5FDA490064039B /* DPPhotoBrowserEditorCollectionViewCell.m in Sources */,
 				49EC24661F57BE9C00E9808C /* UIScrollView+DPTouchEvent.m in Sources */,
+				49CF5A261F5F97320064039B /* DPPhotoChooseViewController.m in Sources */,
+				49CF5A1F1F5F972C0064039B /* DPPhotoAlbumsViewController.m in Sources */,
 				49F2DDF61F4D2D7B007B0CB7 /* UIView+DPCategory.m in Sources */,
+				4927523F1F624D1B0060F171 /* UIViewController+BackButtonHandler.m in Sources */,
+				49CF5A1E1F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m in Sources */,
+				49CF5A101F5F95960064039B /* DPPhotoChooseToolBar.m in Sources */,
+				49E6DF6C1F60E53700A00464 /* DPPhotoBrowserModel.m in Sources */,
 				49F2DDB11F4D28CA007B0CB7 /* AppDelegate.m in Sources */,
 				49F2DE1C1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m in Sources */,
 				49F2DDFD1F4D2DD6007B0CB7 /* DPPhotoListView.m in Sources */,
 				49EC247F1F58078100E9808C /* NSData+DPBase64String.m in Sources */,
+				49CF5A311F5FDA330064039B /* DPPhotoBrowserEditor.m in Sources */,
 				49F2DDF41F4D2D7B007B0CB7 /* DPPhotoUtils.m in Sources */,
 				49F2DDAE1F4D28CA007B0CB7 /* main.m in Sources */,
+				49CF5A251F5F97320064039B /* DPPhotoChooseViewCell.m in Sources */,
+				49CF5A201F5F972C0064039B /* DPPhotoAlbumModel.m in Sources */,
 				49F2DDFC1F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +571,7 @@
 			baseConfigurationReference = 2CD9E3E04A95DDEB12E3BC06 /* Pods-DPPhotoListViewDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = NXMAY6U4X8;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/DPPhotoListViewDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = DPPhotoListViewDemo/Info.plist;
@@ -476,6 +581,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8c698185-84e1-4ffb-b0bf-b18368e1e25f";
 				PROVISIONING_PROFILE_SPECIFIER = WXDating_Dev;
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -484,6 +590,7 @@
 			baseConfigurationReference = E8BB476FED3C473B434963C3 /* Pods-DPPhotoListViewDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = NXMAY6U4X8;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/DPPhotoListViewDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = DPPhotoListViewDemo/Info.plist;
@@ -493,6 +600,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8c698185-84e1-4ffb-b0bf-b18368e1e25f";
 				PROVISIONING_PROFILE_SPECIFIER = WXDating_Dev;
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};

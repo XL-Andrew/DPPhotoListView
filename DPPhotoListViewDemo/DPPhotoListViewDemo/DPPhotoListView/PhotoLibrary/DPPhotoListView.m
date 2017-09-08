@@ -11,6 +11,8 @@
 #import "DPPhotoBrowser.h"
 #import "DPPhotoLibrary.h"
 #import "UIScrollView+DPTouchEvent.h"
+#import "DPPhotoAlbumsViewController.h"
+#import "DPPhotoChooseViewController.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
@@ -20,7 +22,10 @@
 #import <AssetsLibrary/ALAssetsGroup.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
 
-@interface  DPPhotoListView () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@class UIActionSheetDelegateImpl;
+static UIActionSheetDelegateImpl * delegateImpl;
+
+@interface  DPPhotoListView () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DPPhotoAlbumsDelegate>
 {
     NSUInteger                  _lineNumber;            //每行cell个数
     CGFloat                     _lineSpacing;           //列间距
@@ -220,7 +225,13 @@
 #pragma mark -  UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        delegateImpl = nil;
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        actionSheet.delegate = nil;
+    });
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         switch (buttonIndex) {
             case 0: {
                 if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -242,13 +253,13 @@
             case 1: {//打开相册
                 //相册是可以用模拟器打开
                 if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-                    UIImagePickerController *imagePickerController = [UIImagePickerController new];
-                    imagePickerController.delegate = self;
-                    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                    imagePickerController.allowsEditing = YES;
-                    imagePickerController.mediaTypes = @[(NSString *)kUTTypeImage];
-                    
-                    [self.viewController presentViewController:imagePickerController animated:YES completion:nil];
+                    DPPhotoAlbumsViewController *photoBrowser = [[DPPhotoAlbumsViewController alloc] init];
+                    photoBrowser.delegate = self;
+                    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:photoBrowser];
+                    DPPhotoChooseViewController *tvc = [[DPPhotoChooseViewController alloc]init];
+                    tvc.chooseViewDataSource = [[DPPhotoUtils getCameraRollAlbum] mutableCopy];
+                    [nav pushViewController:tvc animated:YES];
+                    [self.viewController presentViewController:nav animated:YES completion:nil];
                 }else{
                     UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"Error" message:@"没有相册" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
                     [alter show];
@@ -259,7 +270,21 @@
             default:
                 break;
         }
-    }];
+}
+
+- (void)chooseCompleteBackWithModel:(NSArray<DPPhotoBrowserModel *> *)photos
+{
+    NSLog(@"");
+}
+
+- (void)chooseCompleteBackWithImages:(NSArray<UIImage *> *)images
+{
+    NSLog(@"");
+}
+
+- (void)chooseCompleteBackWithBase64String:(NSArray<NSString *> *)strings
+{
+    NSLog(@"");
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

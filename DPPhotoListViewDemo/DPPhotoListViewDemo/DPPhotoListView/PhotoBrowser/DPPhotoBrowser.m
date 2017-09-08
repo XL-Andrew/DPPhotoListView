@@ -100,7 +100,7 @@
     _pageControl.currentPage = index;
     [self.view layoutIfNeeded];
     [_mainCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-    UIViewController *topVC = [self currentViewController];
+    UIViewController *topVC = [DPPhotoUtils currentViewController];
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [topVC presentViewController:self animated:YES completion:nil];
 }
@@ -237,22 +237,6 @@
     
     [alertController addAction:okAction];
     [alertController addAction:cancelAction];
-}
-
-- (UIViewController *)currentViewController
-{
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    UIViewController *vc = keyWindow.rootViewController;
-    while (vc.presentedViewController) {
-        vc = vc.presentedViewController;
-        
-        if ([vc isKindOfClass:[UINavigationController class]]) {
-            vc = [(UINavigationController *)vc visibleViewController];
-        } else if ([vc isKindOfClass:[UITabBarController class]]) {
-            vc = [(UITabBarController *)vc selectedViewController];
-        }
-    }
-    return vc;
 }
 
 - (void)didReceiveMemoryWarning {

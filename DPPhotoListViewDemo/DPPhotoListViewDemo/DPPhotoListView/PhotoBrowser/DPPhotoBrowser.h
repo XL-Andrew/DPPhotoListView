@@ -26,11 +26,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGRect zoomViewRect;
 
 /**
- 缩放动画(用于处理横屏滚动时,回缩动画错位)
- */
-@property (nonatomic, assign) BOOL showZoomAnimation;
-
-/**
  显示图片浏览器
 
  @param index 显示位置
