@@ -21,6 +21,8 @@
     DPPhotoChooseToolBar *toolBar;
 }
 
+@property (nonatomic, strong) NSMutableArray <DPPhotoBrowserModel *> __block *tempArray;//临时数据源
+
 @property (nonatomic, assign) NSUInteger __block selectNum;//选择图片个数
 
 @property (nonatomic, assign) NSUInteger index;//当前滚动位数
@@ -30,14 +32,6 @@
 @end
 
 @implementation DPPhotoBrowserEditor
-
-- (instancetype)init
-{
-    if (self = [super init]) {
-        self.maxSelectCount = 9;
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -67,8 +61,19 @@
 
 - (void)initialize
 {
-    if (_index > _browserDataSource.count) {
-        _index = _browserDataSource.count - 1;
+    _tempArray = [NSMutableArray array];
+    if (_browseImageType == DPBrowseImageTypePreview) {
+        [self.browserDataSource enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.isSelected) {
+                [_tempArray addObject:obj];
+            }
+        }];
+    } else {
+        _tempArray = [_browserDataSource mutableCopy];
+    }
+    
+    if (_index > _tempArray.count) {
+        _index = _tempArray.count - 1;
     }
     
     self.selectNum = 0;
@@ -76,7 +81,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor blackColor];
-    self.title = [NSString stringWithFormat:@"%ld/%ld",_index + 1,_browserDataSource.count];
+    self.title = [NSString stringWithFormat:@"%ld/%ld",_index + 1,_tempArray.count];
     
     selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
     selectButton.frame = CGRectMake(0, 0, 60, 44);
@@ -86,6 +91,7 @@
     [selectButton setImageEdgeInsets:UIEdgeInsetsMake(12, 40, 12, 0)];
     [selectButton addTarget:self action:@selector(btnSelectClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:selectButton];
+    
     
 }
 
@@ -115,7 +121,7 @@
                 DPPhotoAlbumsViewController *vc = obj;
                 if ([vc.delegate respondsToSelector:@selector(chooseCompleteBackWithModel:)]) {
                     NSMutableArray __block *karr = [NSMutableArray array];
-                    [weakSelf.browserDataSource enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [weakSelf.tempArray enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                         if (obj.isSelected) {
                             [karr addObject:obj];
                         }
@@ -124,7 +130,7 @@
                 }
                 if ([vc.delegate respondsToSelector:@selector(chooseCompleteBackWithImages:)]) {
                     NSMutableArray __block *karr = [NSMutableArray array];
-                    [weakSelf.browserDataSource enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [weakSelf.tempArray enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                         if (obj.isSelected) {
                             [DPPhotoUtils requestImageForAsset:obj.photo size:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT) resizeMode:PHImageRequestOptionsResizeModeNone completion:^(UIImage *image, NSDictionary *info) {
                                 [karr addObject:image];
@@ -135,7 +141,7 @@
                 }
                 if ([vc.delegate respondsToSelector:@selector(chooseCompleteBackWithBase64String:)]) {
                     NSMutableArray __block *karr = [NSMutableArray array];
-                    [weakSelf.browserDataSource enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [weakSelf.tempArray enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                         if (obj.isSelected) {
                             [DPPhotoUtils requestImageForAsset:obj.photo size:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT) resizeMode:PHImageRequestOptionsResizeModeNone completion:^(UIImage *image, NSDictionary *info) {
                                 [karr addObject:[DPPhotoUtils processingImages:image]];
@@ -172,7 +178,7 @@
 #endif
     
     [_mainCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-    [_browserDataSource enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_tempArray enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (_index == idx) {
             selectButton.selected = obj.isSelected;
         }
@@ -186,12 +192,12 @@
 #pragma mark -  UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _browserDataSource.count;
+    return _tempArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DPPhotoBrowserModel *model = [_browserDataSource objectAtIndex:indexPath.row];
+    DPPhotoBrowserModel *model = [_tempArray objectAtIndex:indexPath.row];
     WS(weakSelf);
     static NSString *CellIdentifier = @"DPPhotoBrowserEditorCollectionViewCell";
     DPPhotoBrowserEditorCollectionViewCell __weak *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -215,14 +221,18 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     _index = scrollView.contentOffset.x / scrollView.bounds.size.width;
-    self.title = [NSString stringWithFormat:@"%ld/%ld",_index + 1,_browserDataSource.count];
-    DPPhotoBrowserModel *model = [_browserDataSource objectAtIndex:_index];
+    self.title = [NSString stringWithFormat:@"%ld/%ld",_index + 1,_tempArray.count];
+    DPPhotoBrowserModel *model = [_tempArray objectAtIndex:_index];
     selectButton.selected = model.isSelected;
 }
 
 #pragma mark -  点击事件
 - (void)btnSelectClick:(UIButton *)sender
 {
+    if (!sender.selected && self.selectNum >= self.maxSelectCount) {
+        [[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"最多只能选择%ld张",self.maxSelectCount] delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil] show];
+        return;
+    }
     if (selectButton.selected) {
         self.selectNum --;
     }
@@ -230,20 +240,11 @@
     if (self.selectNum < self.maxSelectCount && !selectButton.selected) {
         [selectButton.imageView.layer addAnimation:[DPPhotoUtils getButtonStatusChangedAnimation] forKey:nil];
         self.selectNum ++;
-    } else {
-        [[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"最多只能选择%ld张",self.maxSelectCount] delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil] show];
-        return;
     }
-//    if (!selectButton.selected) {
-//        [selectButton.imageView.layer addAnimation:[DPPhotoUtils getButtonStatusChangedAnimation] forKey:nil];
-//        self.selectNum ++;
-//    } else {
-//        self.selectNum --;
-//    }
-    DPPhotoBrowserModel *model = [_browserDataSource objectAtIndex:_index];
-    model.isSelected = !selectButton.selected;
-    [_browserDataSource replaceObjectAtIndex:_index withObject:model];
     selectButton.selected = !selectButton.selected;
+    DPPhotoBrowserModel *model = [_tempArray objectAtIndex:_index];
+    model.isSelected = selectButton.selected;
+    [_tempArray replaceObjectAtIndex:_index withObject:model];
 }
 
 #pragma mark -  private
@@ -302,6 +303,18 @@
     [[self.navigationController viewControllers] enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[DPPhotoChooseViewController class]]) {
             DPPhotoChooseViewController *vc = obj;
+            if (_browserDataSource.count != _tempArray.count) {
+                [_browserDataSource enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull browseModel, NSUInteger idxBrowse, BOOL * _Nonnull stop) {
+                    [_tempArray enumerateObjectsUsingBlock:^(DPPhotoBrowserModel * _Nonnull tempModel, NSUInteger idxTemp, BOOL * _Nonnull stop) {
+                        if (tempModel.photo == browseModel.photo) {
+                            if (tempModel.isSelected != browseModel.isSelected) {
+                                [_browserDataSource replaceObjectAtIndex:idxBrowse withObject:tempModel];
+                            }
+                            *stop = YES;
+                        }
+                    }];
+                }];
+            }
             vc.chooseViewDataSource = weakSelf.browserDataSource;
         }
     }];

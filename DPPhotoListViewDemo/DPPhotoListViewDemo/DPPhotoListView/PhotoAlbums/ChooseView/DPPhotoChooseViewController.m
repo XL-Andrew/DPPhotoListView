@@ -71,6 +71,7 @@
     mainCollectionView.bounces = YES;
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
+    mainCollectionView.alwaysBounceVertical = YES;
     mainCollectionView.showsVerticalScrollIndicator = NO;
     mainCollectionView.showsHorizontalScrollIndicator = NO;
     
@@ -85,6 +86,7 @@
         DPPhotoBrowserEditor *editor = [[DPPhotoBrowserEditor alloc]init];
         editor.browserDataSource = weakSelf.chooseViewDataSource;
         editor.showIndex = 0;
+        editor.browseImageType = DPBrowseImageTypePreview;
         editor.maxSelectCount = weakSelf.maxSelectCount;
         [weakSelf.navigationController pushViewController:editor animated:YES];
     };

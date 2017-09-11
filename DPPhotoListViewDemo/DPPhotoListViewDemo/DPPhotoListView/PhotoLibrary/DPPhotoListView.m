@@ -260,7 +260,6 @@ static UIActionSheetDelegateImpl * delegateImpl;
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
                 DPPhotoAlbumsViewController *photoBrowser = [[DPPhotoAlbumsViewController alloc] init];
                 photoBrowser.delegate = self;
-                photoBrowser.maxSelectCount = 2;
                 [photoBrowser showPhotoAlbumsController];
             }else{
                 UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"Error" message:@"没有相册" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
