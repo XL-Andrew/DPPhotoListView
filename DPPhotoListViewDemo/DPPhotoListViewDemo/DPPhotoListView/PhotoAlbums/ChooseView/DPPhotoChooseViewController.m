@@ -17,11 +17,12 @@
 @interface DPPhotoChooseViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 {
     UICollectionView *mainCollectionView;
+    UICollectionViewFlowLayout *flowLayout;
 }
 
 @property (nonatomic, assign) NSUInteger __block selectNum;//选择图片个数
 
-@property (nonatomic, strong) DPPhotoChooseToolBar *toolBar;
+@property (nonatomic, strong) DPPhotoChooseToolBar *toolBar;//底部Toolbar
 
 @end
 
@@ -37,6 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //设置暗色导航
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
@@ -60,7 +62,7 @@
 - (void)createSubviews
 {
     WS(weakSelf);
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumLineSpacing = LineSpacing; //上下的间距 可以设置0看下效果
     flowLayout.minimumInteritemSpacing = LineSpacing;
     flowLayout.itemSize = CGSizeMake((self.view.bounds.size.width - 3 * LineSpacing) / 4, (self.view.bounds.size.width - 3 * LineSpacing) / 4);
@@ -74,15 +76,15 @@
     mainCollectionView.alwaysBounceVertical = YES;
     mainCollectionView.showsVerticalScrollIndicator = NO;
     mainCollectionView.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:mainCollectionView];
     
     [mainCollectionView registerClass:[DPPhotoChooseViewCell class] forCellWithReuseIdentifier:@"DPPhotoChooseViewCell"];
     [mainCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-    [self.view addSubview:mainCollectionView];
     
-    self.toolBar = [[DPPhotoChooseToolBar alloc]init];
-    self.toolBar.showPreviewButton = YES;
+    _toolBar = [[DPPhotoChooseToolBar alloc]init];
+    _toolBar.showPreviewButton = YES;
     //预览
-    self.toolBar.PreviewButtonClick = ^{
+    _toolBar.PreviewButtonClick = ^{
         DPPhotoBrowserEditor *editor = [[DPPhotoBrowserEditor alloc]init];
         editor.browserDataSource = weakSelf.chooseViewDataSource;
         editor.showIndex = 0;
@@ -91,7 +93,7 @@
         [weakSelf.navigationController pushViewController:editor animated:YES];
     };
     //确认
-    self.toolBar.ConfirmButtonClick = ^{
+    _toolBar.ConfirmButtonClick = ^{
         [[weakSelf.navigationController viewControllers] enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[DPPhotoAlbumsViewController class]]) {
                 DPPhotoAlbumsViewController *vc = obj;
@@ -130,7 +132,7 @@
             }
         }];
     };
-    [self.view addSubview:self.toolBar];
+    [self.view addSubview:_toolBar];
     
     
     
@@ -149,7 +151,7 @@
         make.height.mas_equalTo(44);
     }];
 #else
-    mainCollectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    mainCollectionView.frame = CGRectMake(0, LineSpacing, self.view.bounds.size.width, self.view.bounds.size.height - 44);
     self.toolBar.frame = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
 #endif
 }
@@ -163,8 +165,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WS(weakSelf)
-    DPPhotoBrowserModel __block *model = [self.chooseViewDataSource objectAtIndex:indexPath.row];
     static NSString *CellIdentifier = @"DPPhotoChooseViewCell";
+    DPPhotoBrowserModel __block *model = [self.chooseViewDataSource objectAtIndex:indexPath.row];
     DPPhotoChooseViewCell __weak *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.thumbnailPhoto = model.photo;
     cell.isButtonSelected = model.isSelected;

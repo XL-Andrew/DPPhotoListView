@@ -103,6 +103,18 @@
     dataSource = arrAlbum;
 }
 
+//弹出相册浏览器
+- (void)showPhotoAlbumsController
+{
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self];
+    DPPhotoChooseViewController *tvc = [[DPPhotoChooseViewController alloc]init];
+    tvc.chooseViewDataSource = [[DPPhotoUtils getCameraRollAlbum] mutableCopy];
+    tvc.maxSelectCount = self.maxSelectCount;
+    [nav pushViewController:tvc animated:NO];
+    [[DPPhotoUtils currentViewController] presentViewController:nav animated:YES completion:nil];
+}
+
+
 - (void)initialize
 {
     self.title = @"照片";
@@ -126,9 +138,13 @@
     tableview.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:tableview];
     
+#if __has_include(<Masonry/Masonry.h>)
     [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
+#else
+    tableview.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+#endif
 }
 
 
@@ -161,6 +177,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //选择相册
     DPPhotoAlbumModel *model = [dataSource objectAtIndex:indexPath.row];
     DPPhotoChooseViewController *vc = [[DPPhotoChooseViewController alloc]init];
     vc.chooseViewDataSource = [[DPPhotoUtils getAssetsInFetchResult:model.result ascending:NO] mutableCopy];
@@ -173,17 +190,6 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)showPhotoAlbumsController
-{
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self];
-    DPPhotoChooseViewController *tvc = [[DPPhotoChooseViewController alloc]init];
-    tvc.chooseViewDataSource = [[DPPhotoUtils getCameraRollAlbum] mutableCopy];
-    tvc.maxSelectCount = self.maxSelectCount;
-    [nav pushViewController:tvc animated:NO];
-    [[DPPhotoUtils currentViewController] presentViewController:nav animated:YES completion:nil];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

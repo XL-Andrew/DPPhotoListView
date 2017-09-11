@@ -59,9 +59,9 @@
         make.width.height.mas_equalTo(self.mas_width).multipliedBy(0.3);
     }];
 #else
-    selectButton.frame = CGRectMake(self.bounds.size.width / 3 * 2, 0, self.bounds.size.width / 3, self.bounds.size.width / 3);
-    maskView.frame = self.frame;
-    thumbnailImageView.frame = self.frame;
+    thumbnailImageView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    maskView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);;
+    selectButton.frame = CGRectMake(self.bounds.size.width - self.bounds.size.width / 3.3, 0, self.bounds.size.width / 3.3, self.bounds.size.width / 3.3);
 #endif
     
 }

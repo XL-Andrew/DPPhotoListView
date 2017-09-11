@@ -50,7 +50,7 @@
 @property (nonatomic, assign) NSUInteger maxSelectCount;
 
 /**
- 弹出视图
+ 弹出相册浏览器
  */
 - (void)showPhotoAlbumsController;
 

@@ -19,6 +19,14 @@
     UIView *line;
 }
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        
+    }
+    return self;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
@@ -34,11 +42,6 @@
     line.backgroundColor = RGB_COLOR(207, 207, 207, 1.0f);
     [self addSubview:line];
     
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(0);
-        make.width.mas_equalTo(self.mas_width);
-        make.height.mas_equalTo(0.5);
-    }];
     
     previewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     previewButton.hidden = YES;
@@ -50,11 +53,6 @@
     [previewButton addTarget:self action:@selector(previewClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:previewButton];
     
-    [previewButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(0);
-        make.width.mas_equalTo(60);
-        make.height.mas_equalTo(self.mas_height);
-    }];
     
     confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
     confirmButton.backgroundColor = GRAY_COLOR;
@@ -67,13 +65,38 @@
     [confirmButton addTarget:self action:@selector(confirmClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:confirmButton];
     
+    
+#if __has_include(<Masonry/Masonry.h>)
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(0);
+        make.width.mas_equalTo(self.mas_width);
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    [previewButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(0);
+        make.width.mas_equalTo(60);
+        make.height.mas_equalTo(self.mas_height);
+    }];
+    
     [confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mas_top).with.offset(8);
         make.bottom.mas_equalTo(self.mas_bottom).with.offset(- 8);
         make.right.mas_equalTo(self.mas_right).with.offset(- 10);
         make.width.mas_equalTo(60);
     }];
+#else
+   
+#endif
     
+}
+
+- (void)layoutSubviews
+{    
+    [super layoutSubviews];
+    line.frame = CGRectMake(0, 0, self.frame.size.width, 0.5);
+    previewButton.frame = CGRectMake(0, 0, 60, self.frame.size.height);
+    confirmButton.frame = CGRectMake(self.frame.size.width - 60 - 10, 8, 60, self.frame.size.height - 16);
 }
 
 - (void)previewClick
