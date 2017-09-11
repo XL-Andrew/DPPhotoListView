@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		13F0602E2C9E94E851311BAD /* libPods-DPPhotoListViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */; };
 		4927523F1F624D1B0060F171 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927523E1F624D1B0060F171 /* UIViewController+BackButtonHandler.m */; };
+		492752521F629D8B0060F171 /* DPPhotoChooseToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 492752511F629D8B0060F171 /* DPPhotoChooseToolBar.m */; };
 		4960D1C21F4E74ED0004499B /* localPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 4960D1C11F4E74ED0004499B /* localPic.png */; };
-		49CF5A101F5F95960064039B /* DPPhotoChooseToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A031F5F95960064039B /* DPPhotoChooseToolBar.m */; };
 		49CF5A1E1F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A191F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m */; };
 		49CF5A1F1F5F972C0064039B /* DPPhotoAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A1B1F5F972C0064039B /* DPPhotoAlbumsViewController.m */; };
 		49CF5A201F5F972C0064039B /* DPPhotoAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5A1D1F5F972C0064039B /* DPPhotoAlbumModel.m */; };
@@ -48,9 +48,9 @@
 		4804B5C73B966A4404EA3B9D /* libPods-DPPhotoListViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DPPhotoListViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4927523D1F624D1B0060F171 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		4927523E1F624D1B0060F171 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
+		492752501F629D8B0060F171 /* DPPhotoChooseToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoChooseToolBar.h; sourceTree = "<group>"; };
+		492752511F629D8B0060F171 /* DPPhotoChooseToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoChooseToolBar.m; sourceTree = "<group>"; };
 		4960D1C11F4E74ED0004499B /* localPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = localPic.png; sourceTree = "<group>"; };
-		49CF5A021F5F95960064039B /* DPPhotoChooseToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoChooseToolBar.h; sourceTree = "<group>"; };
-		49CF5A031F5F95960064039B /* DPPhotoChooseToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoChooseToolBar.m; sourceTree = "<group>"; };
 		49CF5A181F5F972C0064039B /* DPPhotoAlbumsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoAlbumsTableViewCell.h; sourceTree = "<group>"; };
 		49CF5A191F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPPhotoAlbumsTableViewCell.m; sourceTree = "<group>"; };
 		49CF5A1A1F5F972C0064039B /* DPPhotoAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPPhotoAlbumsViewController.h; sourceTree = "<group>"; };
@@ -135,8 +135,6 @@
 				49CF5A161F5F96D40064039B /* Albums */,
 				49CF5A171F5F96D40064039B /* ChooseView */,
 				49CF5A2E1F5FDA140064039B /* BrowserEditor */,
-				49CF5A021F5F95960064039B /* DPPhotoChooseToolBar.h */,
-				49CF5A031F5F95960064039B /* DPPhotoChooseToolBar.m */,
 			);
 			path = PhotoAlbums;
 			sourceTree = "<group>";
@@ -161,6 +159,8 @@
 				49CF5A241F5F97320064039B /* DPPhotoChooseViewController.m */,
 				49CF5A211F5F97320064039B /* DPPhotoChooseViewCell.h */,
 				49CF5A221F5F97320064039B /* DPPhotoChooseViewCell.m */,
+				492752501F629D8B0060F171 /* DPPhotoChooseToolBar.h */,
+				492752511F629D8B0060F171 /* DPPhotoChooseToolBar.m */,
 			);
 			path = ChooseView;
 			sourceTree = "<group>";
@@ -439,7 +439,6 @@
 				49F2DDF61F4D2D7B007B0CB7 /* UIView+DPCategory.m in Sources */,
 				4927523F1F624D1B0060F171 /* UIViewController+BackButtonHandler.m in Sources */,
 				49CF5A1E1F5F972C0064039B /* DPPhotoAlbumsTableViewCell.m in Sources */,
-				49CF5A101F5F95960064039B /* DPPhotoChooseToolBar.m in Sources */,
 				49E6DF6C1F60E53700A00464 /* DPPhotoBrowserModel.m in Sources */,
 				49F2DDB11F4D28CA007B0CB7 /* AppDelegate.m in Sources */,
 				49F2DE1C1F4D8B14007B0CB7 /* DPPhotoBrowserCollectionViewCell.m in Sources */,
@@ -451,6 +450,7 @@
 				49CF5A251F5F97320064039B /* DPPhotoChooseViewCell.m in Sources */,
 				49CF5A201F5F972C0064039B /* DPPhotoAlbumModel.m in Sources */,
 				49F2DDFC1F4D2DD6007B0CB7 /* DPPhotoListCollectionViewCell.m in Sources */,
+				492752521F629D8B0060F171 /* DPPhotoChooseToolBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

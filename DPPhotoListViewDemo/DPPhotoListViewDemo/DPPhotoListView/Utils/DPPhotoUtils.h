@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
+#import "DPPhotoBrowserModel.h"
 
 @interface DPPhotoUtils : NSObject
 
@@ -55,14 +56,14 @@
  @param ascending 排序方式
  @return 图片合集
  */
-+ (NSArray<PHAsset *> *)getAssetsInFetchResult:(PHFetchResult *)fetchResult ascending:(BOOL)ascending;
++ (NSArray<DPPhotoBrowserModel *> *)getAssetsInFetchResult:(PHFetchResult *)fetchResult ascending:(BOOL)ascending;
 
 /**
  获取相机交卷所有照片
  
  @return PHAsset NSArray
  */
-+ (NSArray<PHAsset *> *)getCameraRollAlbum;//Block//:(void (^)(NSArray *albums))alubmsBlock;
++ (NSArray<DPPhotoBrowserModel *> *)getCameraRollAlbum;
 
 /**
  选择按钮动画

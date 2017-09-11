@@ -17,12 +17,7 @@
 @interface DPPhotoChooseViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 {
     UICollectionView *mainCollectionView;
-//    NSMutableArray *_chooseViewDataSource;
 }
-
-//@property (nonatomic, strong) NSMutableArray __block *photosArray;
-
-//@property (nonatomic, strong) NSMutableArray __block *chooseViewDataSource;
 
 @property (nonatomic, assign) NSUInteger __block selectNum;//选择图片个数
 
@@ -90,6 +85,7 @@
         DPPhotoBrowserEditor *editor = [[DPPhotoBrowserEditor alloc]init];
         editor.browserDataSource = weakSelf.chooseViewDataSource;
         editor.showIndex = 0;
+        editor.maxSelectCount = weakSelf.maxSelectCount;
         [weakSelf.navigationController pushViewController:editor animated:YES];
     };
     //确认
@@ -164,20 +160,28 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    __weak __typeof(&*self)weakSelf = self;
+    WS(weakSelf)
     DPPhotoBrowserModel __block *model = [self.chooseViewDataSource objectAtIndex:indexPath.row];
     static NSString *CellIdentifier = @"DPPhotoChooseViewCell";
     DPPhotoChooseViewCell __weak *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.thumbnailPhoto = model.photo;
     cell.isButtonSelected = model.isSelected;
     cell.selectedBlock = ^(BOOL hasSelected) {
+        
         if (hasSelected) {
             model.isSelected = NO;
             weakSelf.selectNum --;
-        } else {
+            return YES;
+        }
+        
+        if (weakSelf.selectNum < weakSelf.maxSelectCount && !hasSelected) {
             model.isSelected = YES;
             weakSelf.selectNum ++;
+            return YES;
+        } else {
+            [[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"最多只能选择%ld张",weakSelf.maxSelectCount] delegate:weakSelf cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil] show];
         }
+        return NO;
     };
     for (id subView in cell.contentView.subviews) {
         [subView removeFromSuperview];
@@ -190,6 +194,7 @@
     DPPhotoBrowserEditor *editor = [[DPPhotoBrowserEditor alloc]init];
     editor.browserDataSource = self.chooseViewDataSource;
     editor.showIndex = indexPath.row;
+    editor.maxSelectCount = self.maxSelectCount;
     [self.navigationController pushViewController:editor animated:YES];
 }
 

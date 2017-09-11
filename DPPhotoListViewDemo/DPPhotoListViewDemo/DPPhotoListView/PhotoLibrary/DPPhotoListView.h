@@ -35,6 +35,15 @@ typedef enum : NSUInteger {
  */
 - (void)deletedPhotoAtIndex:(NSUInteger)index;
 
+
+/**
+ 删除某个图片
+
+ @param index 删除位置
+ @param dataSource 删除之前的数据源
+ */
+- (void)deletedPhotoAtIndex:(NSUInteger)index withCurrentDataSource:(NSMutableArray *)dataSource;
+
 @end
 
 @interface DPPhotoListView : UIView <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>

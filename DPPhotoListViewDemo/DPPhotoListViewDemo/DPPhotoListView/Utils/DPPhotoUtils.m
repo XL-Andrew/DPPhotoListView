@@ -118,7 +118,7 @@
 
 + (UIViewController *)currentViewController
 {
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow?:[[[UIApplication sharedApplication] delegate] window];
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window]?:[UIApplication sharedApplication].keyWindow;
     UIViewController *vc = keyWindow.rootViewController;
     while (vc.presentedViewController) {
         vc = vc.presentedViewController;
@@ -131,6 +131,8 @@
     }
     return vc;
 }
+
+#pragma mark -  Get image from PHAsset
 
 + (void)requestOriginalImageDataForAsset:(PHAsset *)asset completion:(void (^)(NSData *data, NSDictionary *info))completion
 {
@@ -178,19 +180,34 @@
 }
 
 #pragma mark - For all images within a specified album
-+ (NSArray<PHAsset *> *)getAssetsInFetchResult:(PHFetchResult *)fetchResult ascending:(BOOL)ascending
++ (NSArray<DPPhotoBrowserModel *> *)getAssetsInFetchResult:(PHFetchResult *)fetchResult ascending:(BOOL)ascending
 {
-    NSMutableArray<PHAsset *> *arr = [NSMutableArray array];
+    NSMutableArray<DPPhotoBrowserModel *> *arr = [NSMutableArray array];
     
     PHFetchResult *result = fetchResult;
     [result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (((PHAsset *)obj).mediaType == PHAssetMediaTypeImage) {
-            [arr addObject:obj];
+            DPPhotoBrowserModel *model = [[DPPhotoBrowserModel alloc]init];
+            model.isSelected = NO;
+            model.photo = obj;
+            [arr addObject:model];
         }
     }];
     return arr;
 }
 
++ (NSArray<DPPhotoBrowserModel *> *)getCameraRollAlbum
+{
+    PHFetchOptions *option = [[PHFetchOptions alloc] init];
+    option.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
+    option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    
+    PHAssetCollection *cameraRoll = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
+    PHFetchResult<PHAsset *> *result = [PHAsset fetchAssetsInAssetCollection:cameraRoll options:option];
+    return [DPPhotoUtils getAssetsInFetchResult:result ascending:NO];
+}
+
+#pragma mark -  Animation
 + (CAKeyframeAnimation *)getButtonStatusChangedAnimation
 {
     CAKeyframeAnimation *animate = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
@@ -206,15 +223,6 @@
     return animate;
 }
 
-+ (NSArray<PHAsset *> *)getCameraRollAlbum//Block//:(void (^)(NSArray *albums))alubmsBlock
-{
-    PHFetchOptions *option = [[PHFetchOptions alloc] init];
-    option.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
-    option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-    
-    PHAssetCollection *cameraRoll = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
-    PHFetchResult<PHAsset *> *result = [PHAsset fetchAssetsInAssetCollection:cameraRoll options:option];
-    return [DPPhotoUtils getAssetsInFetchResult:result ascending:NO];
-}
+
 
 @end

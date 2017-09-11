@@ -31,6 +31,14 @@
 
 @implementation DPPhotoBrowserEditor
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.maxSelectCount = 9;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -215,12 +223,23 @@
 #pragma mark -  点击事件
 - (void)btnSelectClick:(UIButton *)sender
 {
-    if (!selectButton.selected) {
+    if (selectButton.selected) {
+        self.selectNum --;
+    }
+    
+    if (self.selectNum < self.maxSelectCount && !selectButton.selected) {
         [selectButton.imageView.layer addAnimation:[DPPhotoUtils getButtonStatusChangedAnimation] forKey:nil];
         self.selectNum ++;
     } else {
-        self.selectNum --;
+        [[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"最多只能选择%ld张",self.maxSelectCount] delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil] show];
+        return;
     }
+//    if (!selectButton.selected) {
+//        [selectButton.imageView.layer addAnimation:[DPPhotoUtils getButtonStatusChangedAnimation] forKey:nil];
+//        self.selectNum ++;
+//    } else {
+//        self.selectNum --;
+//    }
     DPPhotoBrowserModel *model = [_browserDataSource objectAtIndex:_index];
     model.isSelected = !selectButton.selected;
     [_browserDataSource replaceObjectAtIndex:_index withObject:model];

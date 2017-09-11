@@ -89,16 +89,17 @@
 
 - (void)btnSelectClick:(UIButton *)sender
 {
-    if (!selectButton.selected) {
-        [selectButton.imageView.layer addAnimation:[DPPhotoUtils getButtonStatusChangedAnimation] forKey:nil];
-        maskView.hidden = NO;
-    } else {
-        maskView.hidden = YES;
-    }
     if (self.selectedBlock) {
-        self.selectedBlock(selectButton.selected);
+        if (self.selectedBlock(selectButton.selected)) {
+            selectButton.selected = !selectButton.selected;
+            if (selectButton.selected) {
+                [selectButton.imageView.layer addAnimation:[DPPhotoUtils getButtonStatusChangedAnimation] forKey:nil];
+                maskView.hidden = NO;
+            } else {
+                maskView.hidden = YES;
+            }
+        }
     }
-    selectButton.selected = !selectButton.selected;
 }
 
 

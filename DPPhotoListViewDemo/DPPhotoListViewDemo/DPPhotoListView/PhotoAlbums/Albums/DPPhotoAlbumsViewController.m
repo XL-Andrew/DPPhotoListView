@@ -22,28 +22,19 @@
 
 @implementation DPPhotoAlbumsViewController
 
-- (void)viewDidLoad {
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.maxSelectCount = 9;
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    self.title = @"照片";
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 60, 44);
-    btn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [btn setTitle:@"取消" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(popView) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
-    UITableView *tableview = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
-    tableview.delegate = self;
-    tableview.dataSource = self;
-    [self.view addSubview:tableview];
-    
-    [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view);
-    }];
-    
+    [self initialize];
+    [self createSubviews];
     
     PHFetchOptions *option = [[PHFetchOptions alloc] init];
     option.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
@@ -112,6 +103,35 @@
     dataSource = arrAlbum;
 }
 
+- (void)initialize
+{
+    self.title = @"照片";
+    self.view.backgroundColor = [UIColor whiteColor];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 60, 44);
+    btn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(popView) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+}
+
+- (void)createSubviews
+{
+    UITableView *tableview = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    tableview.delegate = self;
+    tableview.dataSource = self;
+    tableview.tableFooterView = [[UIView alloc] init];
+    tableview.showsVerticalScrollIndicator = NO;
+    tableview.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:tableview];
+    
+    [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -152,6 +172,16 @@
 - (void)popView
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showPhotoAlbumsController
+{
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self];
+    DPPhotoChooseViewController *tvc = [[DPPhotoChooseViewController alloc]init];
+    tvc.chooseViewDataSource = [[DPPhotoUtils getCameraRollAlbum] mutableCopy];
+    tvc.maxSelectCount = self.maxSelectCount;
+    [nav pushViewController:tvc animated:NO];
+    [[DPPhotoUtils currentViewController] presentViewController:nav animated:YES completion:nil];
 }
 
 

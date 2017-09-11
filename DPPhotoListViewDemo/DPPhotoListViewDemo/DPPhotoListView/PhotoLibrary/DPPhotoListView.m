@@ -64,6 +64,7 @@ static UIActionSheetDelegateImpl * delegateImpl;
     _mainCollectionView.backgroundColor = [UIColor whiteColor];
     _mainCollectionView.delegate = self;
     _mainCollectionView.dataSource = self;
+    _mainCollectionView.alwaysBounceVertical = YES;
     _mainCollectionView.userInteractionEnabled = YES;
     _mainCollectionView.showsVerticalScrollIndicator = NO;
     _mainCollectionView.showsHorizontalScrollIndicator = NO;
@@ -166,12 +167,17 @@ static UIActionSheetDelegateImpl * delegateImpl;
     
     //点击删除回调
     cell.deleteButtonClickBlock = ^{
-        NSIndexPath *indexPath = [_mainCollectionView indexPathForCell:cell];
-        [_dataSource removeObjectAtIndex:indexPath.row];
-        [_mainCollectionView deleteItemsAtIndexPaths:@[indexPath]];
         if ([self.delegate respondsToSelector:@selector(deletedPhotoAtIndex:)]) {
             [self.delegate deletedPhotoAtIndex:indexPath.row];
         }
+        
+        if ([self.delegate respondsToSelector:@selector(deletedPhotoAtIndex:withCurrentDataSource:)]) {
+            [self.delegate deletedPhotoAtIndex:indexPath.row withCurrentDataSource:_dataSource];
+        }
+        
+        NSIndexPath *indexPath = [_mainCollectionView indexPathForCell:cell];
+        [_dataSource removeObjectAtIndex:indexPath.row];
+        [_mainCollectionView deleteItemsAtIndexPaths:@[indexPath]];
     };
     
     for (id subView in cell.contentView.subviews) {
@@ -231,45 +237,41 @@ static UIActionSheetDelegateImpl * delegateImpl;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         actionSheet.delegate = nil;
     });
-//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        switch (buttonIndex) {
-            case 0: {
-                if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                    [[[UIAlertView alloc] initWithTitle:@"提示" message:@"此设备没有摄像头" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
-                } else {
-                    UIImagePickerController *imagePickerController = [UIImagePickerController new];
-                    imagePickerController.delegate = self;
-                    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-                    imagePickerController.allowsEditing = YES;
-                    imagePickerController.showsCameraControls = YES;
-                    imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-                    imagePickerController.mediaTypes = @[(NSString *)kUTTypeImage];
-                    
-                    [self.viewController presentViewController:imagePickerController animated:YES completion:nil];
-                }
-            }
+    switch (buttonIndex) {
+        case 0: {
+            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                [[[UIAlertView alloc] initWithTitle:@"提示" message:@"此设备没有摄像头" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+            } else {
+                UIImagePickerController *imagePickerController = [UIImagePickerController new];
+                imagePickerController.delegate = self;
+                imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                imagePickerController.allowsEditing = YES;
+                imagePickerController.showsCameraControls = YES;
+                imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+                imagePickerController.mediaTypes = @[(NSString *)kUTTypeImage];
                 
-                break;
-            case 1: {//打开相册
-                //相册是可以用模拟器打开
-                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-                    DPPhotoAlbumsViewController *photoBrowser = [[DPPhotoAlbumsViewController alloc] init];
-                    photoBrowser.delegate = self;
-                    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:photoBrowser];
-                    DPPhotoChooseViewController *tvc = [[DPPhotoChooseViewController alloc]init];
-                    tvc.chooseViewDataSource = [[DPPhotoUtils getCameraRollAlbum] mutableCopy];
-                    [nav pushViewController:tvc animated:YES];
-                    [self.viewController presentViewController:nav animated:YES completion:nil];
-                }else{
-                    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"Error" message:@"没有相册" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-                    [alter show];
-                }
+                [self.viewController presentViewController:imagePickerController animated:YES completion:nil];
             }
-                break;
-                
-            default:
-                break;
         }
+            
+            break;
+        case 1: {//打开相册
+            //相册是可以用模拟器打开
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                DPPhotoAlbumsViewController *photoBrowser = [[DPPhotoAlbumsViewController alloc] init];
+                photoBrowser.delegate = self;
+                photoBrowser.maxSelectCount = 2;
+                [photoBrowser showPhotoAlbumsController];
+            }else{
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"Error" message:@"没有相册" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+                [alter show];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)chooseCompleteBackWithModel:(NSArray<DPPhotoBrowserModel *> *)photos

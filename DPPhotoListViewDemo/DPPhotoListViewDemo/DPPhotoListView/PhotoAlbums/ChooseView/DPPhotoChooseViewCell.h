@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-typedef void(^SelectedBlock)(BOOL hasSelected);
+typedef BOOL(^SelectedBlock)(BOOL hasSelected);
 
 @interface DPPhotoChooseViewCell : UICollectionViewCell
 

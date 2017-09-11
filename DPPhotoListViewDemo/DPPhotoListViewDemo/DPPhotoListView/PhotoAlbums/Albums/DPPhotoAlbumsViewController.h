@@ -15,23 +15,43 @@
 
 @optional
 
+/**
+ 返回选择图片组
+
+ @param models DPPhotoBrowserModel Array
+ */
 - (void)chooseCompleteBackWithModel:(NSArray<DPPhotoBrowserModel *>*)models;
 
+/**
+ 返回选择图片组
+
+ @param images UIImage Array
+ */
 - (void)chooseCompleteBackWithImages:(NSArray<UIImage *> *)images;
 
+/**
+ 返回选择图片组
+
+ @param strings Base64String Array
+ */
 - (void)chooseCompleteBackWithBase64String:(NSArray<NSString *> *)strings;
 
 @end
 
 @interface DPPhotoAlbumsViewController : UIViewController
 
-@property (nonatomic, weak) id <DPPhotoAlbumsDelegate> delegate;
 
+@property (nonatomic, weak) id <DPPhotoAlbumsDelegate> delegate;
 
 /**
  最大选择张数
  default is 9
  */
 @property (nonatomic, assign) NSUInteger maxSelectCount;
+
+/**
+ 弹出视图
+ */
+- (void)showPhotoAlbumsController;
 
 @end
