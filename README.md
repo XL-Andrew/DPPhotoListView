@@ -4,8 +4,8 @@
 
 
 ![竖列表展示方式](http://upload-images.jianshu.io/upload_images/4842734-7e0af7bda7086fd2.gif?imageMogr2/auto-orient/strip)  
-![横列表展示方式](http://upload-images.jianshu.io/upload_images/4842734-26209ebb35eb71f7.gif?imageMogr2/auto-orient/strip)
-![图片选择器](http://upload-images.jianshu.io/upload_images/4842734-1f66536c2fcadcb7.gif?imageMogr2/auto-orient/strip)
+![横列表展示方式](http://upload-images.jianshu.io/upload_images/4842734-26209ebb35eb71f7.gif?imageMogr2/auto-orient/strip)  
+![图片选择器](http://upload-images.jianshu.io/upload_images/4842734-1f66536c2fcadcb7.gif?imageMogr2/auto-orient/strip)  
 网络&本地图片列表展示器，图片浏览器功能整合。网络图片解析支持SDWebImage和UIImageView+YYWebImage，集成其中一个就可以，会自动选择，如果两个三方库都没有就会用自带方法Data转Image方式，最简单的备用方法，暂时不带cache功能。（现在很少有人会不用SD或者YYKit吧。。。😂😂😂）
 
 #安装方法
