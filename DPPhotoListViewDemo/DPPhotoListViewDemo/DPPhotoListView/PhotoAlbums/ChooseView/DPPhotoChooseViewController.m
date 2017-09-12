@@ -94,7 +94,7 @@
     };
     //确认
     _toolBar.ConfirmButtonClick = ^{
-        [[weakSelf.navigationController viewControllers] enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[weakSelf.navigationController viewControllers] enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull mainStop) {
             if ([obj isKindOfClass:[DPPhotoAlbumsViewController class]]) {
                 DPPhotoAlbumsViewController *vc = obj;
                 if ([vc.delegate respondsToSelector:@selector(chooseCompleteBackWithModel:)]) {
@@ -128,6 +128,7 @@
                     }];
                     [vc.delegate chooseCompleteBackWithBase64String:karr];
                 }
+                *mainStop = YES;
                 [vc dismissViewControllerAnimated:YES completion:nil];
             }
         }];
@@ -171,7 +172,6 @@
     cell.thumbnailPhoto = model.photo;
     cell.isButtonSelected = model.isSelected;
     cell.selectedBlock = ^(BOOL hasSelected) {
-        
         if (hasSelected) {
             model.isSelected = NO;
             weakSelf.selectNum --;
@@ -207,6 +207,7 @@
     return YES;
 }
 
+//底部视图
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
@@ -245,10 +246,13 @@
     [mainCollectionView reloadData];
 }
 
+#pragma mark -  KVO
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
     self.toolBar.confirmNumber = [[change objectForKey:@"new"] integerValue];
 }
+
 - (void)dealloc
 {
     [self removeObserver:self forKeyPath:@"selectNum" context:nil];

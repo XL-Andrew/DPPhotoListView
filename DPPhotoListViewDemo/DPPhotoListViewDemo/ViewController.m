@@ -85,7 +85,7 @@
     NSLog(@"上传图片");
 }
 
-- (void)deletedPhotoAtIndex:(NSUInteger)index
+- (void)deletedPhotoAtIndex:(NSUInteger)index withCurrentDataSource:(NSMutableArray *)dataSource
 {
     NSLog(@"删除了第%ld个图片",index);
 }

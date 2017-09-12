@@ -116,7 +116,7 @@
     toolBar = [[DPPhotoChooseToolBar alloc]init];
     toolBar.toolBarStyle = DPPhotoToolBarStyleDark;
     toolBar.ConfirmButtonClick = ^{
-        [[weakSelf.navigationController viewControllers] enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[weakSelf.navigationController viewControllers] enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull mainStop) {
             if ([obj isKindOfClass:[DPPhotoAlbumsViewController class]]) {
                 DPPhotoAlbumsViewController *vc = obj;
                 if ([vc.delegate respondsToSelector:@selector(chooseCompleteBackWithModel:)]) {
@@ -150,6 +150,7 @@
                     }];
                     [vc.delegate chooseCompleteBackWithBase64String:karr];
                 }
+                *mainStop = YES;
                 [vc dismissViewControllerAnimated:YES completion:nil];
             }
         }];
